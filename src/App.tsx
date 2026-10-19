@@ -4,11 +4,11 @@ import { AppShell } from '@/components/layout/AppShell'
 import { AboutPage } from '@/pages/AboutPage'
 import { AgentAutopsyPage } from '@/pages/AgentAutopsyPage'
 import { BusinessDiagnosisPage } from '@/pages/BusinessDiagnosisPage'
-import { ChallengePlaceholderPage } from '@/pages/ChallengePlaceholderPage'
 import { CognitiveOsPage } from '@/pages/CognitiveOsPage'
 import { EngineeringPage } from '@/pages/EngineeringPage'
 import { ExperiencePage } from '@/pages/ExperiencePage'
 import { HomePage } from '@/pages/HomePage'
+import { HypothesisArenaPage } from '@/pages/HypothesisArenaPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { ProjectDetailPage } from '@/pages/ProjectDetailPage'
 import { ProjectsPage } from '@/pages/ProjectsPage'
@@ -22,27 +22,7 @@ export function AppRoutes() {
       <Route path="/cognitive-os" element={<CognitiveOsPage />} />
       <Route path="/cognitive-os/business-diagnosis" element={<BusinessDiagnosisPage />} />
       <Route path="/cognitive-os/agent-autopsy" element={<AgentAutopsyPage />} />
-      <Route
-        path="/cognitive-os/hypothesis-arena"
-        element={
-          <ChallengePlaceholderPage
-            title="Hypothesis Arena"
-            description="Compare explanations for a change in a metric, inspect the evidence, and choose an appropriate experiment."
-            objective="Examine a predefined dataset, compare summary statistics across groups or periods, and review what the evidence can and cannot establish about causality."
-            duration="10–15 minutes"
-            interaction="Explore data, select variables, compare groups or periods, and review supported statistical results."
-            source="Synthetic dataset bundled with the site."
-            willInclude={[
-              'Summary statistics derived from the supplied dataset.',
-              'Competing hypotheses with supporting and counterexample evidence.',
-              'Group and period comparisons with documented calculations.',
-              'Null and alternative hypotheses, sample sizes, effect sizes, and p-values where applicable.',
-              'Explicit assumptions, limitations, and a warning against causal claims from observational data.',
-              'A decision record with the chosen experiment and next information required.',
-            ]}
-          />
-        }
-      />
+      <Route path="/cognitive-os/hypothesis-arena" element={<HypothesisArenaPage />} />
       <Route path="/engineering" element={<EngineeringPage />} />
       <Route path="/experience" element={<ExperiencePage />} />
       <Route path="/about" element={<AboutPage />} />

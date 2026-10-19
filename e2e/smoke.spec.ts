@@ -48,3 +48,16 @@ test('direct URL loads the interactive Agent Autopsy challenge', async ({ page }
   await page.getByRole('button', { name: 'Event 8 details' }).click()
   await expect(page.getByText(/kept refund-policy-v2 \(rank 1\)/i)).toBeVisible()
 })
+
+test('direct URL loads the interactive Hypothesis Arena challenge', async ({ page }) => {
+  await page.goto('/cognitive-os/hypothesis-arena/')
+
+  await expect(page.getByRole('heading', { level: 1, name: 'Hypothesis Arena' })).toBeVisible()
+  await page.getByRole('button', { name: /start investigating/i }).click()
+  await expect(page.getByText('Experiments', { exact: true })).toBeVisible()
+  await expect(page.getByText('Beliefs', { exact: true })).toBeVisible()
+
+  await page.getByRole('button', { name: /run experiment/i }).first().click()
+  await expect(page.getByRole('button', { name: /already run/i })).toBeVisible()
+  await expect(page.getByText(/1 experiment\(s\) applied/i)).toBeVisible()
+})

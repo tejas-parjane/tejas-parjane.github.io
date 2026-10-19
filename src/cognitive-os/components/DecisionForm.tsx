@@ -74,6 +74,10 @@ export function DecisionForm({
   for (const group of targetGroups) {
     if (group.required && !state.targetSelections[group.id]) missing.push(group.label.toLowerCase())
   }
+  const minExperiments = definition.minExperiments ?? 0
+  if (state.experimentsRun.length < minExperiments) {
+    missing.push(`at least ${minExperiments} experiment${minExperiments === 1 ? '' : 's'}`)
+  }
   if (!state.primaryHypothesis) missing.push('a primary hypothesis')
   if (!state.confidence) missing.push('a confidence level')
   if (!state.nextAction) missing.push('a next action')
