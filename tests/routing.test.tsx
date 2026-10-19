@@ -32,10 +32,18 @@ describe('application routes', () => {
     expect(screen.getAllByRole('article')).toHaveLength(4)
   })
 
-  it('supports a direct project URL', () => {
+  it('supports a direct project URL and renders its case study', () => {
     renderAt('/projects/agentci/')
     expect(screen.getByRole('heading', { level: 1, name: 'AgentCI' })).toBeInTheDocument()
-    expect(screen.getByText(/regressions between runs/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Overview' })).toBeInTheDocument()
+    expect(screen.getAllByText(/early public alpha/i).length).toBeGreaterThan(0)
+  })
+
+  it('renders a 404 page for an unknown project slug', () => {
+    renderAt('/projects/not-a-real-project/')
+    expect(
+      screen.getByRole('heading', { level: 1, name: /this page is not part of the system/i }),
+    ).toBeInTheDocument()
   })
 
   it('renders the Cognitive OS laboratory and challenge placeholders', () => {

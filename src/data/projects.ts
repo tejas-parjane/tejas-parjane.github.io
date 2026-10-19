@@ -54,7 +54,7 @@ export const projects: Project[] = [
     description:
       'An open-source predictive decision system covering churn and monetization modeling, stratified evaluation, a rules-based decision engine with guardrails, and a FastAPI service. A live demo is published alongside the repository.',
     status: 'implemented',
-    statusNote: 'Open-source implementation with a live demo. Metrics are awaiting source verification before publication.',
+    statusNote: 'Independent project on synthetic behavioural data. Metrics verified from the repository evaluation log; the small held-out test set limits interpretation.',
     skills: ['Scikit-learn', 'XGBoost', 'Model evaluation', 'FastAPI'],
     links: [
       { kind: 'demo', label: 'Live demo', href: 'https://tejas-parjane.github.io/attention-os/' },
@@ -76,7 +76,7 @@ export const projects: Project[] = [
     description:
       'An open-source forecasting engine with expanding-window backtesting, ARIMA / ETS / XGBoost model selection by sMAPE, uncertainty, explainability, and a FastAPI interface. A live demo is published alongside the repository.',
     status: 'implemented',
-    statusNote: 'Open-source implementation with a live demo. Published results are awaiting dataset and methodology verification.',
+    statusNote: 'Independent project on a synthetic single series. Metrics verified from the recorded backtest artifact; validation windows are roughly 109–110 observations, not a 30-step horizon.',
     skills: ['ARIMA', 'ETS', 'XGBoost', 'Backtesting', 'sMAPE'],
     links: [
       {
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     description:
       'An open-source CI and release-gate toolkit for AI agents. It captures traces, inspects tool calls, evaluates behavior assertions and policy checks, compares runs, and blocks releases when behavior regresses.',
     status: 'implemented',
-    statusNote: 'Open-source implementation. No hosted demo; inspect the source and test suite.',
+    statusNote: 'Early public alpha (v0.1.1). Open source; no hosted demo, so inspect the source and test suite.',
     skills: ['Python', 'Agent traces', 'Policy checks', 'CI/CD'],
     links: [
       { kind: 'repository', label: 'Repository', href: 'https://github.com/tejas-parjane/agentci' },
