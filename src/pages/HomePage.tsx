@@ -29,6 +29,7 @@ const challengePreviews = [
     duration: '10–15 min',
     interaction: 'Hypothesis testing · funnel data',
     source: 'Synthetic dataset',
+    status: 'available' as const,
   },
   {
     title: 'Agent Autopsy',
@@ -37,6 +38,7 @@ const challengePreviews = [
     duration: '10–15 min',
     interaction: 'Trace inspection · deterministic tests',
     source: 'Project-style fixture',
+    status: 'in-development' as const,
   },
   {
     title: 'Hypothesis Arena',
@@ -45,6 +47,7 @@ const challengePreviews = [
     duration: '10–15 min',
     interaction: 'Statistics · evidence comparison',
     source: 'Synthetic dataset',
+    status: 'in-development' as const,
   },
 ]
 
@@ -236,7 +239,7 @@ export function HomePage() {
               </div>
 
               <div className="border-t border-line bg-surface-2/50 p-7 sm:p-10 lg:border-l lg:border-t-0 lg:p-12">
-                <p className="section-label">Challenges in development</p>
+                <p className="section-label">Cognitive OS challenges</p>
                 <ul className="mt-5 space-y-3">
                   {challengePreviews.map((challenge) => (
                     <li key={challenge.title}>
@@ -246,7 +249,8 @@ export function HomePage() {
                       >
                         <div className="flex items-start justify-between gap-3">
                           <p className="text-sm font-semibold">{challenge.title}</p>
-                          <span className="shrink-0 font-mono text-[0.625rem] text-muted">
+                          <span className="shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.1em] text-muted">
+                            {challenge.status === 'available' ? 'Available' : 'In development'} ·{' '}
                             {challenge.duration}
                           </span>
                         </div>

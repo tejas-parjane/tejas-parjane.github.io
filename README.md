@@ -1,6 +1,6 @@
 # Tejas Parjane — Portfolio + Cognitive OS
 
-A static, responsive portfolio for Tejas Parjane covering AI engineering, data science, and product building, plus the foundation for an interactive decision-intelligence laboratory called **Cognitive OS**.
+A static, responsive portfolio for Tejas Parjane covering AI engineering, data science, and product building, plus an interactive, browser-only decision-intelligence laboratory called **Cognitive OS**.
 
 The site is deliberately honest about implementation status: it does not publish unverified metrics, fabricated project links, or simulated results presented as live outcomes.
 
@@ -44,14 +44,14 @@ npm run test:e2e
 | --- | --- |
 | `/` | Implemented |
 | `/projects/` | Implemented |
-| `/projects/jaheeratech/` | Placeholder case study (Phase 2) |
-| `/projects/attention-os/` | Placeholder case study (Phase 2) |
-| `/projects/forecasting-engine/` | Placeholder case study (Phase 2) |
-| `/projects/agentci/` | Placeholder case study (Phase 2) |
-| `/cognitive-os/` | Laboratory overview implemented; challenges in development |
-| `/cognitive-os/business-diagnosis/` | Placeholder (Phase 4) |
-| `/cognitive-os/agent-autopsy/` | Placeholder (Phase 5) |
-| `/cognitive-os/hypothesis-arena/` | Placeholder (Phase 6) |
+| `/projects/jaheeratech/` | Implemented case study (Phase 2) |
+| `/projects/attention-os/` | Implemented case study (Phase 2) |
+| `/projects/forecasting-engine/` | Implemented case study (Phase 2) |
+| `/projects/agentci/` | Implemented case study (Phase 2) |
+| `/cognitive-os/` | Laboratory overview; Business Diagnosis live, two challenges in development |
+| `/cognitive-os/business-diagnosis/` | Implemented interactive challenge (Phase 3) |
+| `/cognitive-os/agent-autopsy/` | Placeholder (Phase 4) |
+| `/cognitive-os/hypothesis-arena/` | Placeholder (Phase 5) |
 | `/engineering/` | Implemented overview of architecture and practices |
 | `/experience/` | Implemented |
 | `/about/` | Implemented |
@@ -83,6 +83,13 @@ If a custom domain (for example `tejasparjane.in`) is configured in **Settings �
 - `src/data/projects.ts` — project metadata with explicit `implemented` / `in-development` / `planned` status and verified links.
 - `src/data/experience.ts` — professional history from the current resume.
 - `src/case-studies/types.ts` — typed contract for the Phase 2 case studies.
+- `src/cognitive-os/types.ts` — shared challenge contract (steps, evidence, hypotheses, scoring, decision records).
+- `src/cognitive-os/engine.ts` — deterministic reducer, state validation, scoring, and reproducibility fingerprint.
+- `src/cognitive-os/datasets/businessDiagnosis.ts` — documented, seeded synthetic dataset (no randomness at runtime).
+- `src/cognitive-os/analysis/businessDiagnosisAnalysis.ts` — independent, unit-tested funnel, standardisation, and shift-share calculations.
+- `src/cognitive-os/challenges/businessDiagnosis.ts` — challenge definition, reference reading, and the designed scoring rubric.
+
+The Cognitive OS is browser-only and deterministic: no LLM, no backend, and no arbitrary code execution. Reference conclusions and the rubric are derived from the dataset by the analysis module, not from hardcoded outcomes.
 
 External links are verified before publication. Attention-OS, Forecasting Engine, AgentCI, Growth Decision Engine, and the Business-Intelligent RAG Agent repositories, along with the JaheeraTech frontend and the two GitHub Pages demos, were reachable when this release was prepared.
 
@@ -104,21 +111,21 @@ src/
 ├── components/     # layout, navigation, projects, UI primitives
 ├── pages/          # route-level views
 ├── data/           # typed profile, project, experience, capability data
-├── case-studies/   # case-study contracts (content in Phase 2)
+├── case-studies/   # case-study contracts and content
+├── cognitive-os/   # challenge engine, dataset, analysis, and components
 ├── hooks/          # document metadata
 ├── lib/            # small shared utilities
 └── styles/         # design tokens and global styles
 ```
 
-Domain logic for Cognitive OS will live outside the page components, so calculations, scoring, state transitions, and decision records can be unit-tested independently.
+Domain logic for the Cognitive OS lives outside the page components, so calculations, scoring, state transitions, and decision records are unit-tested independently of rendering.
 
 ## Phases
 
-- **Phase 1 (this release):** foundation, theme system, homepage, project index and cards, experience, about, placeholders, tests, and deployment.
+- **Phase 1:** foundation, theme system, homepage, project index and cards, experience, about, placeholders, tests, and deployment.
 - **Phase 2:** verified project case studies.
-- **Phase 3:** Cognitive OS foundation and typed challenge contracts.
-- **Phase 4:** Business Diagnosis.
-- **Phase 5:** Agent Autopsy.
-- **Phase 6:** Hypothesis Arena.
-- **Phase 7:** quality and launch verification.
-- **Phase 8 (optional):** secure LLM investigator behind a backend. No provider credentials belong in this static bundle.
+- **Phase 3 (this release):** Cognitive OS engine and the interactive Business Diagnosis challenge.
+- **Phase 4:** Agent Autopsy, built on the same engine.
+- **Phase 5:** Hypothesis Arena.
+- **Phase 6:** quality and launch verification.
+- **Phase 7 (optional):** secure LLM investigator behind a backend. No provider credentials belong in this static bundle.

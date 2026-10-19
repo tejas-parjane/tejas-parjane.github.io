@@ -29,9 +29,11 @@ test('theme toggle persists across a reload', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
 })
 
-test('direct URL loads the Cognitive OS laboratory', async ({ page }) => {
+test('direct URL loads the interactive Business Diagnosis challenge', async ({ page }) => {
   await page.goto('/cognitive-os/business-diagnosis/')
 
   await expect(page.getByRole('heading', { level: 1, name: 'Business Diagnosis' })).toBeVisible()
-  await expect(page.getByText('In development').first()).toBeVisible()
+  await page.getByRole('button', { name: /begin investigation/i }).click()
+  await expect(page.getByRole('heading', { name: 'Evidence' })).toBeVisible()
+  await expect(page.getByText('Competing hypotheses')).toBeVisible()
 })

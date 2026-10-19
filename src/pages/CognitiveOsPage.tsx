@@ -12,6 +12,7 @@ const challenges = [
     duration: '10–15 minutes',
     interaction: 'Select hypotheses, inspect evidence, filter dimensions, and run predefined comparisons.',
     source: 'Synthetic dataset bundled with the site',
+    status: 'available' as const,
   },
   {
     title: 'Agent Autopsy',
@@ -20,6 +21,7 @@ const challenges = [
     duration: '10–15 minutes',
     interaction: 'Inspect a trace, select a failure, apply a repair, and rerun deterministic tests.',
     source: 'Predefined trace fixture',
+    status: 'in-development' as const,
   },
   {
     title: 'Hypothesis Arena',
@@ -28,6 +30,7 @@ const challenges = [
     duration: '10–15 minutes',
     interaction: 'Explore summary statistics, compare groups, and review test assumptions.',
     source: 'Synthetic dataset bundled with the site',
+    status: 'in-development' as const,
   },
 ]
 
@@ -82,12 +85,12 @@ export function CognitiveOsPage() {
               id="challenges-heading"
               className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl"
             >
-              Three challenges, in development.
+              One challenge live, two in development.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              The laboratory is being released in stages. Challenge pages currently describe the
-              intended interaction; results and scoring will be enabled only when the deterministic
-              implementation and its tests are complete.
+              Business Diagnosis is fully interactive: inspect evidence, run comparisons, and submit a
+              scored conclusion. The remaining challenges show their intended interaction until their
+              deterministic implementation and tests are complete.
             </p>
           </div>
 
@@ -98,8 +101,15 @@ export function CognitiveOsPage() {
                   <p className="font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-muted">
                     {String(index + 1).padStart(2, '0')}
                   </p>
-                  <span className="rounded-full border border-line bg-surface-2 px-2.5 py-1 font-mono text-[0.625rem] uppercase tracking-[0.12em] text-muted">
-                    In development
+                  <span
+                    className={
+                      'rounded-full border px-2.5 py-1 font-mono text-[0.625rem] uppercase tracking-[0.12em] ' +
+                      (challenge.status === 'available'
+                        ? 'border-lime/60 bg-lime/15 text-ink'
+                        : 'border-line bg-surface-2 text-muted')
+                    }
+                  >
+                    {challenge.status === 'available' ? 'Available' : 'In development'}
                   </span>
                 </div>
                 <h3 className="mt-4 text-xl font-semibold tracking-tight">{challenge.title}</h3>
@@ -130,7 +140,7 @@ export function CognitiveOsPage() {
                   to={challenge.to}
                   className="mt-auto inline-flex items-center gap-1.5 pt-6 text-xs font-medium text-muted transition-colors hover:text-ink"
                 >
-                  View challenge
+                  {challenge.status === 'available' ? 'Start challenge' : 'View challenge'}
                   <ArrowRight aria-hidden="true" className="size-3.5" />
                 </Link>
               </article>
