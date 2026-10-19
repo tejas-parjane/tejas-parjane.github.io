@@ -18,6 +18,14 @@ export type HypothesisKind =
   | 'measurement'
   | 'external'
   | 'none'
+  // Agent Autopsy kinds: failure modes rather than metric mechanisms.
+  | 'retrieval'
+  | 'tooling'
+  | 'state'
+  | 'synthesis'
+  | 'policy'
+  | 'symptom'
+  | 'environment'
 
 export interface Hypothesis {
   id: string
@@ -65,6 +73,22 @@ export interface DecisionOption {
   description: string
   /** For next-action options: hypothesis ids this action is consistent with. */
   consistentWith?: string[]
+  /** For next-action options: the cost or downside a careful decision should state. */
+  tradeoffs?: string
+}
+
+/**
+ * A decision the challenge requires beyond the hypothesis: a locus, a stage, or
+ * any other choice the state machine must gate and fingerprint. Business
+ * Diagnosis has none; Agent Autopsy uses one to name the earliest failure.
+ */
+export interface DecisionTargetGroup {
+  id: string
+  label: string
+  description: string
+  options: DecisionOption[]
+  /** When true, the challenge cannot be submitted until a valid option is chosen. */
+  required: boolean
 }
 
 export interface Caveat {
@@ -92,6 +116,8 @@ export interface ChallengeDefinition {
   confidenceOptions: DecisionOption[]
   nextActionOptions: DecisionOption[]
   caveats: Caveat[]
+  /** Extra required decisions beyond the hypothesis pair. Omitted when unused. */
+  decisionTargets?: DecisionTargetGroup[]
   /** Evidence the interpretation rubric treats as discriminating and necessary. */
   keyEvidence: EvidenceId[]
   weights: ScoringWeights
@@ -107,6 +133,8 @@ export interface ChallengeState {
   confidence: string | null
   acknowledgedCaveats: string[]
   nextAction: string | null
+  /** Selections for each declared decision target group, keyed by group id. */
+  targetSelections: Record<string, string | null>
   notes: string
   submitted: boolean
 }
@@ -123,6 +151,7 @@ export type ChallengeAction =
   | { type: 'SET_CONFIDENCE'; id: string }
   | { type: 'TOGGLE_CAVEAT'; id: string }
   | { type: 'SET_NEXT_ACTION'; id: string }
+  | { type: 'SET_TARGET_SELECTION'; group: string; id: string | null }
   | { type: 'SET_NOTES'; value: string }
   | { type: 'SUBMIT' }
   | { type: 'RESET' }
@@ -167,6 +196,7 @@ export interface DecisionRecord {
   confidence: string | null
   nextAction: string | null
   acknowledgedCaveats: string[]
+  targetSelections: Record<string, string | null>
   inspectedEvidence: EvidenceId[]
   ranComparisons: ComparisonId[]
   filters: Record<FilterDimensionId, string>

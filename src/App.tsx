@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from '@/app/theme'
 import { AppShell } from '@/components/layout/AppShell'
 import { AboutPage } from '@/pages/AboutPage'
+import { AgentAutopsyPage } from '@/pages/AgentAutopsyPage'
 import { BusinessDiagnosisPage } from '@/pages/BusinessDiagnosisPage'
 import { ChallengePlaceholderPage } from '@/pages/ChallengePlaceholderPage'
 import { CognitiveOsPage } from '@/pages/CognitiveOsPage'
@@ -20,27 +21,7 @@ export function AppRoutes() {
       <Route path="/projects/:slug" element={<ProjectDetailPage />} />
       <Route path="/cognitive-os" element={<CognitiveOsPage />} />
       <Route path="/cognitive-os/business-diagnosis" element={<BusinessDiagnosisPage />} />
-      <Route
-        path="/cognitive-os/agent-autopsy"
-        element={
-          <ChallengePlaceholderPage
-            title="Agent Autopsy"
-            description="Inspect a failing AI agent workflow, identify the violated constraint, and verify a repair against deterministic tests."
-            objective="Work through a predefined agent trace containing tool calls, validation checks, a failure event, and recovery behaviour. Select a failure, choose a repair, and rerun local assertions."
-            duration="10–15 minutes"
-            interaction="Trace inspection, failure selection, repair selection, and deterministic test reruns."
-            source="Predefined trace fixture. No visitor-supplied code is executed."
-            willInclude={[
-              'A complete trace: request, actions, tool calls, results, policy checks, and failure events.',
-              'At least three failure types: invalid tool output, missing evidence, and permission or policy violation.',
-              'Visible assertions and the constraint each one tests.',
-              'Distinct repair choices with verifiable outcomes.',
-              'A rerun that passes only when the underlying assertions pass.',
-              'A comparison between the original and repaired results.',
-            ]}
-          />
-        }
-      />
+      <Route path="/cognitive-os/agent-autopsy" element={<AgentAutopsyPage />} />
       <Route
         path="/cognitive-os/hypothesis-arena"
         element={

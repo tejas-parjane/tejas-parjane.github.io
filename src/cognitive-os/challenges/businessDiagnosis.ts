@@ -573,6 +573,7 @@ export function buildDecisionRecord(state: ChallengeState): DecisionRecord {
     confidence: state.confidence,
     nextAction: state.nextAction,
     acknowledgedCaveats: [...state.acknowledgedCaveats],
+    targetSelections: { ...state.targetSelections },
     inspectedEvidence: [...state.inspected],
     ranComparisons: [...state.ranComparisons],
     filters: { ...state.filters },

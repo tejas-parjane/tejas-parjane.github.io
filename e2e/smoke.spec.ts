@@ -37,3 +37,14 @@ test('direct URL loads the interactive Business Diagnosis challenge', async ({ p
   await expect(page.getByRole('heading', { name: 'Evidence' })).toBeVisible()
   await expect(page.getByText('Competing hypotheses')).toBeVisible()
 })
+
+test('direct URL loads the interactive Agent Autopsy challenge', async ({ page }) => {
+  await page.goto('/cognitive-os/agent-autopsy/')
+
+  await expect(page.getByRole('heading', { level: 1, name: 'Agent Autopsy' })).toBeVisible()
+  await page.getByRole('button', { name: /review the trace/i }).click()
+  await expect(page.getByText('Execution timeline')).toBeVisible()
+  await expect(page.getByText('Diagnostic comparisons')).toBeVisible()
+  await page.getByRole('button', { name: 'Event 8 details' }).click()
+  await expect(page.getByText(/kept refund-policy-v2 \(rank 1\)/i)).toBeVisible()
+})

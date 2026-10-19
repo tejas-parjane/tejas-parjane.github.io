@@ -56,6 +56,9 @@ describe('application routes', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'Business Diagnosis' }),
     ).toBeInTheDocument()
+
+    renderAt('/cognitive-os/agent-autopsy/')
+    expect(screen.getByRole('heading', { level: 1, name: 'Agent Autopsy' })).toBeInTheDocument()
   })
 
   it('renders a 404 page for an unknown route', () => {

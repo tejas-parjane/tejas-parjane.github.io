@@ -34,11 +34,11 @@ const challengePreviews = [
   {
     title: 'Agent Autopsy',
     to: '/cognitive-os/agent-autopsy/',
-    objective: 'Inspect a failing agent trace, apply a repair, and rerun assertions.',
+    objective: 'Debug a synthetic agent trace that gave a confident but wrong answer.',
     duration: '10–15 min',
-    interaction: 'Trace inspection · deterministic tests',
-    source: 'Project-style fixture',
-    status: 'in-development' as const,
+    interaction: 'Trace timeline · root-cause vs symptom',
+    source: 'Synthetic seeded trace',
+    status: 'available' as const,
   },
   {
     title: 'Hypothesis Arena',

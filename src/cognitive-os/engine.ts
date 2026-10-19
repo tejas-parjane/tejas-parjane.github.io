@@ -35,6 +35,9 @@ export function createInitialState(definition: ChallengeDefinition): ChallengeSt
   const filters: Record<string, string> = {}
   for (const dimension of definition.filters) filters[dimension.id] = ALL_FILTER_VALUE
 
+  const targetSelections: Record<string, string | null> = {}
+  for (const group of definition.decisionTargets ?? []) targetSelections[group.id] = null
+
   const firstStep = definition.steps[0]?.id ?? 'briefing'
   return {
     step: firstStep,
@@ -46,9 +49,21 @@ export function createInitialState(definition: ChallengeDefinition): ChallengeSt
     confidence: null,
     acknowledgedCaveats: [],
     nextAction: null,
+    targetSelections,
     notes: '',
     submitted: false,
   }
+}
+
+function requiredTargetGroups(definition: ChallengeDefinition) {
+  return (definition.decisionTargets ?? []).filter((group) => group.required)
+}
+
+function targetSelectionSatisfied(state: ChallengeState, definition: ChallengeDefinition): boolean {
+  return requiredTargetGroups(definition).every((group) => {
+    const selection = state.targetSelections[group.id]
+    return selection !== undefined && selection !== null && hasId(group.options, selection)
+  })
 }
 
 function stepOrder(definition: ChallengeDefinition): ChallengeStepId[] {
@@ -77,7 +92,8 @@ export function canSubmit(state: ChallengeState, definition: ChallengeDefinition
     state.confidence !== null &&
     hasId(definition.confidenceOptions, state.confidence) &&
     state.nextAction !== null &&
-    hasId(definition.nextActionOptions, state.nextAction)
+    hasId(definition.nextActionOptions, state.nextAction) &&
+    targetSelectionSatisfied(state, definition)
   )
 }
 
@@ -148,6 +164,15 @@ export function transition(
       if (!hasId(definition.nextActionOptions, action.id)) return state
       return { ...state, nextAction: action.id }
     }
+    case 'SET_TARGET_SELECTION': {
+      const group = (definition.decisionTargets ?? []).find((item) => item.id === action.group)
+      if (!group) return state
+      if (action.id === null) {
+        return { ...state, targetSelections: { ...state.targetSelections, [group.id]: null } }
+      }
+      if (!hasId(group.options, action.id)) return state
+      return { ...state, targetSelections: { ...state.targetSelections, [group.id]: action.id } }
+    }
     case 'SET_NOTES': {
       return { ...state, notes: action.value.slice(0, 2000) }
     }
@@ -191,6 +216,16 @@ export function validateState(state: ChallengeState, definition: ChallengeDefini
   }
   for (const id of state.acknowledgedCaveats) {
     if (!hasId(definition.caveats, id)) problems.push(`Unknown caveat: ${id}`)
+  }
+  for (const group of definition.decisionTargets ?? []) {
+    const selection = state.targetSelections[group.id]
+    if (selection === undefined) {
+      problems.push(`Missing decision target: ${group.id}`)
+    } else if (selection !== null && !hasId(group.options, selection)) {
+      problems.push(`Unknown option for decision target ${group.id}: ${selection}`)
+    } else if (group.required && selection === null && state.submitted) {
+      problems.push(`Required decision target not selected: ${group.id}`)
+    }
   }
   for (const dimension of definition.filters) {
     const value = state.filters[dimension.id]
@@ -251,6 +286,7 @@ export function canonicalState(state: ChallengeState): string {
     confidence: state.confidence,
     acknowledgedCaveats: [...state.acknowledgedCaveats].sort(),
     nextAction: state.nextAction,
+    targetSelections: Object.entries(state.targetSelections).sort(([a], [b]) => a.localeCompare(b)),
     notes: state.notes.trim(),
     submitted: state.submitted,
   })
