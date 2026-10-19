@@ -48,9 +48,9 @@ npm run test:e2e
 | `/projects/attention-os/` | Implemented case study (Phase 2) |
 | `/projects/forecasting-engine/` | Implemented case study (Phase 2) |
 | `/projects/agentci/` | Implemented case study (Phase 2) |
-| `/cognitive-os/` | Laboratory overview; Business Diagnosis live, two challenges in development |
+| `/cognitive-os/` | Laboratory overview; Business Diagnosis and Agent Autopsy live, one challenge in development |
 | `/cognitive-os/business-diagnosis/` | Implemented interactive challenge (Phase 3) |
-| `/cognitive-os/agent-autopsy/` | Placeholder (Phase 4) |
+| `/cognitive-os/agent-autopsy/` | Implemented interactive challenge (Phase 4) |
 | `/cognitive-os/hypothesis-arena/` | Placeholder (Phase 5) |
 | `/engineering/` | Implemented overview of architecture and practices |
 | `/experience/` | Implemented |
@@ -83,13 +83,18 @@ If a custom domain (for example `tejasparjane.in`) is configured in **Settings �
 - `src/data/projects.ts` — project metadata with explicit `implemented` / `in-development` / `planned` status and verified links.
 - `src/data/experience.ts` — professional history from the current resume.
 - `src/case-studies/types.ts` — typed contract for the Phase 2 case studies.
-- `src/cognitive-os/types.ts` — shared challenge contract (steps, evidence, hypotheses, scoring, decision records).
-- `src/cognitive-os/engine.ts` — deterministic reducer, state validation, scoring, and reproducibility fingerprint.
-- `src/cognitive-os/datasets/businessDiagnosis.ts` — documented, seeded synthetic dataset (no randomness at runtime).
+- `src/cognitive-os/types.ts` — shared challenge contract (steps, evidence, hypotheses, decision targets, scoring, decision records).
+- `src/cognitive-os/engine.ts` — deterministic reducer, state validation, scoring, and reproducibility fingerprint, shared by every challenge.
+- `src/cognitive-os/datasets/businessDiagnosis.ts` — documented, seeded synthetic funnel dataset (no randomness at runtime).
 - `src/cognitive-os/analysis/businessDiagnosisAnalysis.ts` — independent, unit-tested funnel, standardisation, and shift-share calculations.
 - `src/cognitive-os/challenges/businessDiagnosis.ts` — challenge definition, reference reading, and the designed scoring rubric.
+- `src/cognitive-os/datasets/agentAutopsy.ts` — documented, seeded synthetic agent execution trace (fixed fixture; only latencies are generated).
+- `src/cognitive-os/analysis/agentAutopsyAnalysis.ts` — independent, unit-tested trace calculations (retrieval audit, buffer diff, step audit, answer support, policy audit, earliest-failure computation).
+- `src/cognitive-os/challenges/agentAutopsy.ts` — Agent Autopsy definition, computed reference reading, and rubric.
 
-The Cognitive OS is browser-only and deterministic: no LLM, no backend, and no arbitrary code execution. Reference conclusions and the rubric are derived from the dataset by the analysis module, not from hardcoded outcomes.
+The Cognitive OS is browser-only and deterministic: no LLM, no backend, and no arbitrary code execution. Reference conclusions and the rubric are derived from the dataset or trace by the analysis module, not from hardcoded outcomes. Every challenge runs on the same engine and shares the same state machine, scoring primitives, and fingerprint; a challenge adds only its own dataset, analysis, definition, and view.
+
+Agent Autopsy adds one engine capability — required *decision targets* beyond the hypothesis pair — used to name the earliest consequential failure. It is additive: Business Diagnosis declares none and behaves as before.
 
 External links are verified before publication. Attention-OS, Forecasting Engine, AgentCI, Growth Decision Engine, and the Business-Intelligent RAG Agent repositories, along with the JaheeraTech frontend and the two GitHub Pages demos, were reachable when this release was prepared.
 
@@ -124,8 +129,8 @@ Domain logic for the Cognitive OS lives outside the page components, so calculat
 
 - **Phase 1:** foundation, theme system, homepage, project index and cards, experience, about, placeholders, tests, and deployment.
 - **Phase 2:** verified project case studies.
-- **Phase 3 (this release):** Cognitive OS engine and the interactive Business Diagnosis challenge.
-- **Phase 4:** Agent Autopsy, built on the same engine.
+- **Phase 3:** Cognitive OS engine and the interactive Business Diagnosis challenge.
+- **Phase 4 (this release):** Agent Autopsy — evidence-based debugging of a synthetic agent trace on the same engine.
 - **Phase 5:** Hypothesis Arena.
 - **Phase 6:** quality and launch verification.
 - **Phase 7 (optional):** secure LLM investigator behind a backend. No provider credentials belong in this static bundle.

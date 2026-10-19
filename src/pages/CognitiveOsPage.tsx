@@ -17,11 +17,11 @@ const challenges = [
   {
     title: 'Agent Autopsy',
     to: '/cognitive-os/agent-autopsy/',
-    objective: 'Investigate a failing AI agent workflow and repair the underlying failure.',
+    objective: 'Debug a synthetic AI agent trace that returned a confident but incorrect answer.',
     duration: '10–15 minutes',
-    interaction: 'Inspect a trace, select a failure, apply a repair, and rerun deterministic tests.',
-    source: 'Predefined trace fixture',
-    status: 'in-development' as const,
+    interaction: 'Walk the timeline, inspect evidence, name the earliest failure, and submit a scored diagnosis.',
+    source: 'Synthetic seeded trace fixture',
+    status: 'available' as const,
   },
   {
     title: 'Hypothesis Arena',
@@ -85,12 +85,12 @@ export function CognitiveOsPage() {
               id="challenges-heading"
               className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl"
             >
-              One challenge live, two in development.
+              Two challenges live, one in development.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              Business Diagnosis is fully interactive: inspect evidence, run comparisons, and submit a
-              scored conclusion. The remaining challenges show their intended interaction until their
-              deterministic implementation and tests are complete.
+              Business Diagnosis and Agent Autopsy are fully interactive: inspect evidence, run comparisons,
+              and submit a scored conclusion or diagnosis. The remaining challenge shows its intended
+              interaction until its deterministic implementation and tests are complete.
             </p>
           </div>
 

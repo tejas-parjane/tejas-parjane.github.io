@@ -1,25 +1,10 @@
 import { RotateCcw } from 'lucide-react'
-import { businessDiagnosisChallenge } from '@/cognitive-os/challenges/businessDiagnosis'
 import { ScorePanel } from '@/cognitive-os/components/ScorePanel'
-import type { DecisionRecord } from '@/cognitive-os/types'
+import type { ChallengeDefinition, DecisionRecord } from '@/cognitive-os/types'
 
-function labelForHypothesis(id: string | null): string {
+function findLabel(options: readonly { id: string; label: string }[], id: string | null): string {
   if (id === null) return 'None'
-  return businessDiagnosisChallenge.hypotheses.find((item) => item.id === id)?.label ?? id
-}
-
-function labelForConfidence(id: string | null): string {
-  if (id === null) return 'None'
-  return businessDiagnosisChallenge.confidenceOptions.find((item) => item.id === id)?.label ?? id
-}
-
-function labelForAction(id: string | null): string {
-  if (id === null) return 'None'
-  return businessDiagnosisChallenge.nextActionOptions.find((item) => item.id === id)?.label ?? id
-}
-
-function labelForCaveat(id: string): string {
-  return businessDiagnosisChallenge.caveats.find((item) => item.id === id)?.label ?? id
+  return options.find((item) => item.id === id)?.label ?? id
 }
 
 function KeyValue({ label, value }: { label: string; value: string }) {
@@ -49,12 +34,15 @@ function KnowledgeList({ title, items, tone }: { title: string; items: string[];
 
 export function DecisionRecordView({
   record,
+  definition,
   onReset,
 }: {
   record: DecisionRecord
+  definition: ChallengeDefinition
   onReset: () => void
 }) {
   const touchedFilters = Object.entries(record.filters).filter(([, value]) => value !== 'all')
+  const targetGroups = definition.decisionTargets ?? []
 
   return (
     <div className="space-y-8">
@@ -75,16 +63,34 @@ export function DecisionRecordView({
           Your submission
         </h2>
         <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-          <KeyValue label="Primary hypothesis" value={labelForHypothesis(record.submittedPrimary)} />
-          <KeyValue label="Secondary hypothesis" value={labelForHypothesis(record.submittedSecondary)} />
-          <KeyValue label="Confidence" value={labelForConfidence(record.confidence)} />
-          <KeyValue label="Next action" value={labelForAction(record.nextAction)} />
+          <KeyValue
+            label="Primary hypothesis"
+            value={findLabel(definition.hypotheses, record.submittedPrimary)}
+          />
+          <KeyValue
+            label="Secondary hypothesis"
+            value={findLabel(definition.hypotheses, record.submittedSecondary)}
+          />
+          {targetGroups.map((group) => (
+            <KeyValue
+              key={group.id}
+              label={group.label}
+              value={findLabel(group.options, record.targetSelections[group.id] ?? null)}
+            />
+          ))}
+          <KeyValue
+            label="Confidence"
+            value={findLabel(definition.confidenceOptions, record.confidence)}
+          />
+          <KeyValue label="Next action" value={findLabel(definition.nextActionOptions, record.nextAction)} />
           <KeyValue
             label="Caveats acknowledged"
             value={
               record.acknowledgedCaveats.length === 0
                 ? 'None'
-                : record.acknowledgedCaveats.map(labelForCaveat).join(' · ')
+                : record.acknowledgedCaveats
+                    .map((id) => definition.caveats.find((item) => item.id === id)?.label ?? id)
+                    .join(' · ')
             }
           />
           <KeyValue
@@ -96,7 +102,10 @@ export function DecisionRecordView({
             }
           />
           <KeyValue label="Evidence inspected" value={`${record.inspectedEvidence.length} panels`} />
-          <KeyValue label="Comparisons run" value={`${record.ranComparisons.length} of ${businessDiagnosisChallenge.comparisons.length}`} />
+          <KeyValue
+            label="Comparisons run"
+            value={`${record.ranComparisons.length} of ${definition.comparisons.length}`}
+          />
         </dl>
       </section>
 
@@ -131,10 +140,10 @@ export function DecisionRecordView({
           Facts, assumptions, and uncertainty
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-          The reference reading separates what the data show from what is assumed and what remains uncertain.
+          The reference reading separates what the evidence shows from what is assumed and what remains uncertain.
         </p>
         <div className="mt-5 grid gap-4 lg:grid-cols-3">
-          <KnowledgeList title="Facts (computed)" items={record.reference.facts} tone="text-ink" />
+          <KnowledgeList title="Facts (observed)" items={record.reference.facts} tone="text-ink" />
           <KnowledgeList title="Assumptions" items={record.reference.assumptions} tone="text-ink" />
           <KnowledgeList title="Uncertainty" items={record.reference.uncertainty} tone="text-ink" />
         </div>
