@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var key = 'tejas-theme'
+          var saved = localStorage.getItem(key)
+          var theme =
+            saved === 'light' || saved === 'dark'
+              ? saved
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+          document.documentElement.dataset.theme = theme
+          document.documentElement.style.colorScheme = theme
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light'
+        }
+      })()
+    </script>
+    <title>Tejas Parjane — AI Engineering, Data Science, Product</title>
+    <meta
+      name="description"
+      content="Tejas Parjane builds data-driven systems and AI-powered applications across machine learning, experimentation, AI workflows, and product engineering."
+    />
+    <meta name="author" content="Tejas Parjane" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href="https://tejas-parjane.github.io/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tejas Parjane" />
+    <meta property="og:title" content="Tejas Parjane — AI Engineering, Data Science, Product" />
+    <meta
+      property="og:description"
+      content="From data to intelligence. From intelligence to products. Explore projects and the Cognitive OS decision laboratory."
+    />
+    <meta property="og:url" content="https://tejas-parjane.github.io/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Tejas Parjane — AI Engineering, Data Science, Product" />
+    <meta
+      name="twitter:description"
+      content="From data to intelligence. From intelligence to products."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
