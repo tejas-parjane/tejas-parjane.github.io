@@ -98,6 +98,28 @@ export interface Caveat {
   required: boolean
 }
 
+export type ExperimentRisk = 'low' | 'medium' | 'high'
+
+/**
+ * An experiment a challenge lets the visitor run. Costs are declared budget
+ * units, not currency; running an experiment reveals evidence and can update a
+ * challenge-specific belief model. Omitted by challenges that do not use them.
+ */
+export interface ChallengeExperiment {
+  id: string
+  label: string
+  description: string
+  /** Declared budget units consumed by running the experiment. */
+  cost: number
+  /** Declared elapsed time before a result is available. */
+  durationDays: number
+  risk: ExperimentRisk
+  /** Declared operational constraint or feasibility note. */
+  feasibility: string
+  /** Evidence that becomes available when the experiment is run. */
+  reveals: EvidenceId[]
+}
+
 export interface ScoringWeights {
   evidence: number
   interpretation: number
@@ -118,6 +140,12 @@ export interface ChallengeDefinition {
   caveats: Caveat[]
   /** Extra required decisions beyond the hypothesis pair. Omitted when unused. */
   decisionTargets?: DecisionTargetGroup[]
+  /** Experiments the visitor may run. Omitted when the challenge has none. */
+  experiments?: ChallengeExperiment[]
+  /** Total experiment budget. Omitted or undefined means no budget limit. */
+  budget?: number
+  /** Minimum experiments that must run before submitting. Defaults to 0. */
+  minExperiments?: number
   /** Evidence the interpretation rubric treats as discriminating and necessary. */
   keyEvidence: EvidenceId[]
   weights: ScoringWeights
@@ -135,6 +163,8 @@ export interface ChallengeState {
   nextAction: string | null
   /** Selections for each declared decision target group, keyed by group id. */
   targetSelections: Record<string, string | null>
+  /** Experiments run, in the order they were run. */
+  experimentsRun: string[]
   notes: string
   submitted: boolean
 }
@@ -152,6 +182,7 @@ export type ChallengeAction =
   | { type: 'TOGGLE_CAVEAT'; id: string }
   | { type: 'SET_NEXT_ACTION'; id: string }
   | { type: 'SET_TARGET_SELECTION'; group: string; id: string | null }
+  | { type: 'RUN_EXPERIMENT'; id: string }
   | { type: 'SET_NOTES'; value: string }
   | { type: 'SUBMIT' }
   | { type: 'RESET' }
@@ -197,6 +228,7 @@ export interface DecisionRecord {
   nextAction: string | null
   acknowledgedCaveats: string[]
   targetSelections: Record<string, string | null>
+  experimentsRun: string[]
   inspectedEvidence: EvidenceId[]
   ranComparisons: ComparisonId[]
   filters: Record<FilterDimensionId, string>

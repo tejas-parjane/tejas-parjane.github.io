@@ -43,6 +43,7 @@ export function DecisionRecordView({
 }) {
   const touchedFilters = Object.entries(record.filters).filter(([, value]) => value !== 'all')
   const targetGroups = definition.decisionTargets ?? []
+  const experiments = definition.experiments ?? []
 
   return (
     <div className="space-y-8">
@@ -52,9 +53,10 @@ export function DecisionRecordView({
         </p>
         <p className="mt-2 font-mono text-2xl">{record.fingerprint}</p>
         <p className="mt-2 text-xs leading-relaxed text-muted">
-          Deterministic hash of your interaction state (step, inspected evidence, comparisons run, filters,
-          conclusion, confidence, caveats, next action, notes) plus the score. The same interactions always
-          produce this same fingerprint. Engine v{record.engineVersion} · dataset {record.datasetId}.
+          Deterministic hash of your interaction state (step, inspected evidence, comparisons run, experiments
+          run, filters, conclusion, confidence, caveats, next action, notes) plus the score. The same
+          interactions always produce this same fingerprint. Engine v{record.engineVersion} · dataset{' '}
+          {record.datasetId}.
         </p>
       </div>
 
@@ -106,6 +108,18 @@ export function DecisionRecordView({
             label="Comparisons run"
             value={`${record.ranComparisons.length} of ${definition.comparisons.length}`}
           />
+          {experiments.length === 0 ? null : (
+            <KeyValue
+              label="Experiments run"
+              value={
+                record.experimentsRun.length === 0
+                  ? 'None'
+                  : record.experimentsRun
+                      .map((id) => experiments.find((item) => item.id === id)?.label ?? id)
+                      .join(' → ')
+              }
+            />
+          )}
         </dl>
       </section>
 

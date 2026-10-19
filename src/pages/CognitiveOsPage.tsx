@@ -26,11 +26,11 @@ const challenges = [
   {
     title: 'Hypothesis Arena',
     to: '/cognitive-os/hypothesis-arena/',
-    objective: 'Compare explanations for a metric change and choose an appropriate experiment.',
+    objective: 'Compare explanations for an activation decline and choose experiments under a budget.',
     duration: '10–15 minutes',
-    interaction: 'Explore summary statistics, compare groups, and review test assumptions.',
-    source: 'Synthetic dataset bundled with the site',
-    status: 'in-development' as const,
+    interaction: 'Rank experiments by information gain, run them within a budget, and update beliefs.',
+    source: 'Synthetic seeded activation dataset',
+    status: 'available' as const,
   },
 ]
 
@@ -85,12 +85,11 @@ export function CognitiveOsPage() {
               id="challenges-heading"
               className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl"
             >
-              Two challenges live, one in development.
+              Three challenges, all interactive.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              Business Diagnosis and Agent Autopsy are fully interactive: inspect evidence, run comparisons,
-              and submit a scored conclusion or diagnosis. The remaining challenge shows its intended
-              interaction until its deterministic implementation and tests are complete.
+              Business Diagnosis, Agent Autopsy, and Hypothesis Arena are fully interactive: inspect evidence, run
+              comparisons or budgeted experiments, and submit a scored conclusion, diagnosis, or decision.
             </p>
           </div>
 

@@ -50,9 +50,23 @@ export function createInitialState(definition: ChallengeDefinition): ChallengeSt
     acknowledgedCaveats: [],
     nextAction: null,
     targetSelections,
+    experimentsRun: [],
     notes: '',
     submitted: false,
   }
+}
+
+export function experimentCost(definition: ChallengeDefinition, ids: readonly string[]): number {
+  let total = 0
+  for (const id of ids) {
+    const experiment = (definition.experiments ?? []).find((item) => item.id === id)
+    if (experiment) total += experiment.cost
+  }
+  return total
+}
+
+export function experimentBudget(definition: ChallengeDefinition): number {
+  return definition.budget ?? Number.POSITIVE_INFINITY
 }
 
 function requiredTargetGroups(definition: ChallengeDefinition) {
@@ -93,7 +107,8 @@ export function canSubmit(state: ChallengeState, definition: ChallengeDefinition
     hasId(definition.confidenceOptions, state.confidence) &&
     state.nextAction !== null &&
     hasId(definition.nextActionOptions, state.nextAction) &&
-    targetSelectionSatisfied(state, definition)
+    targetSelectionSatisfied(state, definition) &&
+    state.experimentsRun.length >= (definition.minExperiments ?? 0)
   )
 }
 
@@ -173,6 +188,20 @@ export function transition(
       if (!hasId(group.options, action.id)) return state
       return { ...state, targetSelections: { ...state.targetSelections, [group.id]: action.id } }
     }
+    case 'RUN_EXPERIMENT': {
+      const experiment = (definition.experiments ?? []).find((item) => item.id === action.id)
+      if (!experiment) return state
+      if (state.experimentsRun.includes(experiment.id)) return state
+      if (experimentCost(definition, state.experimentsRun) + experiment.cost > experimentBudget(definition)) {
+        return state
+      }
+      const experimentsRun = [...state.experimentsRun, experiment.id]
+      const inspected = [...state.inspected]
+      for (const evidenceId of experiment.reveals) {
+        if (!inspected.includes(evidenceId)) inspected.push(evidenceId)
+      }
+      return { ...state, experimentsRun, inspected }
+    }
     case 'SET_NOTES': {
       return { ...state, notes: action.value.slice(0, 2000) }
     }
@@ -226,6 +255,18 @@ export function validateState(state: ChallengeState, definition: ChallengeDefini
     } else if (group.required && selection === null && state.submitted) {
       problems.push(`Required decision target not selected: ${group.id}`)
     }
+  }
+  for (const id of state.experimentsRun) {
+    if (!hasId(definition.experiments ?? [], id)) problems.push(`Unknown experiment: ${id}`)
+  }
+  if (new Set(state.experimentsRun).size !== state.experimentsRun.length) {
+    problems.push('An experiment cannot be run more than once')
+  }
+  if (experimentCost(definition, state.experimentsRun) > experimentBudget(definition)) {
+    problems.push('Experiments exceed the declared budget')
+  }
+  if (state.submitted && state.experimentsRun.length < (definition.minExperiments ?? 0)) {
+    problems.push('Fewer experiments were run than the challenge requires')
   }
   for (const dimension of definition.filters) {
     const value = state.filters[dimension.id]
@@ -287,6 +328,7 @@ export function canonicalState(state: ChallengeState): string {
     acknowledgedCaveats: [...state.acknowledgedCaveats].sort(),
     nextAction: state.nextAction,
     targetSelections: Object.entries(state.targetSelections).sort(([a], [b]) => a.localeCompare(b)),
+    experimentsRun: [...state.experimentsRun],
     notes: state.notes.trim(),
     submitted: state.submitted,
   })

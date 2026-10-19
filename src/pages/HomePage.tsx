@@ -43,11 +43,11 @@ const challengePreviews = [
   {
     title: 'Hypothesis Arena',
     to: '/cognitive-os/hypothesis-arena/',
-    objective: 'Compare explanations for a metric change without overclaiming causality.',
+    objective: 'Choose experiments by information gain and update beliefs without overclaiming causality.',
     duration: '10–15 min',
-    interaction: 'Statistics · evidence comparison',
-    source: 'Synthetic dataset',
-    status: 'in-development' as const,
+    interaction: 'Bayesian beliefs · budgeted experiments',
+    source: 'Synthetic activation dataset',
+    status: 'available' as const,
   },
 ]
 
