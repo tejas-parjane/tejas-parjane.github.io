@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from '@/app/theme'
 import { AppShell } from '@/components/layout/AppShell'
 import { AboutPage } from '@/pages/AboutPage'
+import { BusinessDiagnosisPage } from '@/pages/BusinessDiagnosisPage'
 import { ChallengePlaceholderPage } from '@/pages/ChallengePlaceholderPage'
 import { CognitiveOsPage } from '@/pages/CognitiveOsPage'
 import { EngineeringPage } from '@/pages/EngineeringPage'
@@ -18,27 +19,7 @@ export function AppRoutes() {
       <Route path="/projects" element={<ProjectsPage />} />
       <Route path="/projects/:slug" element={<ProjectDetailPage />} />
       <Route path="/cognitive-os" element={<CognitiveOsPage />} />
-      <Route
-        path="/cognitive-os/business-diagnosis"
-        element={
-          <ChallengePlaceholderPage
-            title="Business Diagnosis"
-            description="Investigate a decline in conversion rate and determine which explanation the available evidence supports."
-            objective="Compare competing explanations for an approximately 18% decline in conversion rate using synthetic funnel, traffic-source, device, landing-page, and campaign data."
-            duration="10–15 minutes"
-            interaction="Select hypotheses, inspect evidence, filter dimensions, run predefined comparisons, and submit a provisional conclusion."
-            source="Synthetic dataset bundled with the site. It is a scenario assumption, not a claim about a real business."
-            willInclude={[
-              'Evidence panels for sessions, funnel progression, traffic mix, device mix, landing-page performance, and conversions.',
-              'Supporting and contradicting evidence for each hypothesis.',
-              'Dimension filters and a predefined comparison period.',
-              'Visible metric definitions and reproducible calculations.',
-              'A provisional conclusion compared with a reference analysis that states uncertainty.',
-              'A decision record covering evidence, limitations, and next information required.',
-            ]}
-          />
-        }
-      />
+      <Route path="/cognitive-os/business-diagnosis" element={<BusinessDiagnosisPage />} />
       <Route
         path="/cognitive-os/agent-autopsy"
         element={
