@@ -65,7 +65,13 @@ This repository is configured for the **user page** `https://tejas-parjane.githu
 
 ### Direct-route refresh
 
-GitHub Pages has no server-side SPA fallback. `scripts/post-build.mjs` copies `dist/index.html` to `dist/404.html` after every build so direct URLs and refreshes resolve to the application. It also writes `.nojekyll`.
+GitHub Pages has no server-side SPA fallback. `scripts/post-build.mjs` runs after every build and:
+
+1. Emits each published route as a real `dist/<route>/index.html` so direct URLs and refreshes return HTTP 200 rather than the 404 document.
+2. Copies `dist/index.html` to `dist/404.html` so unknown paths still boot the client router and render the in-app 404 view.
+3. Writes `.nojekyll`.
+
+When a new route is added, add it to the `routes` list in `scripts/post-build.mjs`.
 
 ### Custom domain
 
