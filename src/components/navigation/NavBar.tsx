@@ -7,10 +7,8 @@ import { resume } from '@/data/profile'
 import { cn } from '@/lib/cn'
 
 const navigation = [
-  { label: 'Home', to: '/' },
-  { label: 'Projects', to: '/projects/' },
-  { label: 'Cognitive OS', to: '/cognitive-os/' },
-  { label: 'Engineering', to: '/engineering/' },
+  { label: 'Work', to: '/projects/' },
+  { label: 'Interactive AI Lab', to: '/cognitive-os/' },
   { label: 'Experience', to: '/experience/' },
   { label: 'About', to: '/about/' },
 ]
@@ -57,7 +55,7 @@ export function NavBar() {
             to={resume.path}
             className="ml-1 rounded-full border border-line px-3 py-2 text-sm text-muted transition-colors hover:border-line-strong hover:text-ink"
           >
-            Resume
+            Résumé
           </Link>
         </nav>
 
@@ -110,7 +108,7 @@ export function NavBar() {
               onClick={() => setOpen(false)}
               className="rounded-lg px-3 py-3 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-ink"
             >
-              Resume
+              Résumé
             </Link>
           </nav>
         </Container>

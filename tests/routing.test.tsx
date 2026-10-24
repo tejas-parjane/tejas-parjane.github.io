@@ -19,23 +19,23 @@ describe('application routes', () => {
   it('renders the homepage', () => {
     renderAt('/')
     expect(
-      screen.getByRole('heading', { level: 1, name: /from data to intelligence/i }),
+      screen.getByRole('heading', { level: 1, name: /evaluated ai systems/i }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /don't just read how i think/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /test how i reason/i })).toBeInTheDocument()
   })
 
   it('renders the projects index', () => {
     renderAt('/projects/')
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      /work, with its implementation status attached/i,
+      /applied ai work, with evidence attached/i,
     )
-    expect(screen.getAllByRole('article')).toHaveLength(4)
+    expect(screen.getAllByRole('article')).toHaveLength(5)
   })
 
   it('supports a direct project URL and renders its case study', () => {
     renderAt('/projects/agentci/')
     expect(screen.getByRole('heading', { level: 1, name: 'AgentCI' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { level: 2, name: 'Overview' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'What I built' })).toBeInTheDocument()
     expect(screen.getAllByText(/early public alpha/i).length).toBeGreaterThan(0)
   })
 
@@ -79,11 +79,11 @@ describe('primary navigation', () => {
       </ThemeProvider>,
     )
 
-    for (const label of ['Home', 'Projects', 'Cognitive OS', 'Engineering', 'Experience', 'About']) {
+    for (const label of ['Work', 'Interactive AI Lab', 'Experience', 'About']) {
       expect(screen.getAllByRole('link', { name: label }).length).toBeGreaterThan(0)
     }
 
-    expect(screen.getAllByRole('link', { name: 'Resume' }).length).toBeGreaterThan(0)
-    expect(screen.getByRole('button', { name: /switch to dark theme/i })).toBeInTheDocument()
+    expect(screen.getAllByRole('link', { name: 'Résumé' }).length).toBeGreaterThan(0)
+    expect(screen.getByRole('button', { name: /switch to light theme/i })).toBeInTheDocument()
   })
 })

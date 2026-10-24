@@ -4,7 +4,6 @@ import {
   ArrowUpRight,
   Brain,
   Database,
-  FlaskConical,
   Layers,
   Mail,
 } from 'lucide-react'
@@ -20,6 +19,8 @@ import { projects, supportingProjects } from '@/data/projects'
 import { useDocumentMeta } from '@/hooks/useDocumentMeta'
 
 const capabilityIcons = [Brain, Database, Layers] as const
+const featuredProjects = projects.filter((project) => project.featured)
+const currentlyBuilding = projects.find((project) => project.slug === 'jaheeratech')
 
 const challengePreviews = [
   {
@@ -76,8 +77,8 @@ const openSource = [
 
 export function HomePage() {
   useDocumentMeta(
-    'Tejas Parjane — AI Engineering, Data Science, Product',
-    'Tejas Parjane builds data-driven systems and AI-powered applications across machine learning, experimentation, AI workflows, and product engineering.',
+    'Tejas Parjane — Applied AI Engineer',
+    'Tejas Parjane builds evaluated AI systems, reliable APIs, and decision workflows for startup teams.',
   )
 
   return (
@@ -93,8 +94,8 @@ export function HomePage() {
               id="hero-heading"
               className="mt-6 max-w-3xl text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.03em] sm:text-6xl lg:text-[4.5rem]"
             >
-              From data to intelligence.
-              <span className="block text-muted">From intelligence to products.</span>
+              Evaluated AI systems.
+              <span className="block text-muted">Built for real decisions.</span>
             </h1>
             <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
               {profile.supportingCopy}
@@ -102,41 +103,34 @@ export function HomePage() {
 
             <div className="mt-10 flex flex-wrap gap-3">
               <ButtonLink to="/projects/">
-                Explore Projects
+                View selected work
                 <ArrowRight aria-hidden="true" className="size-4" />
               </ButtonLink>
-              <ButtonLink to="/cognitive-os/" variant="secondary">
-                <FlaskConical aria-hidden="true" className="size-4" />
-                Enter Cognitive OS
+              <ButtonLink to={resume.path} variant="secondary">
+                Request résumé
               </ButtonLink>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-              <Link
-                to={resume.path}
-                className="text-muted transition-colors hover:text-ink"
-              >
-                View Resume
-              </Link>
+            <div className="mt-6 flex items-center gap-4 text-sm">
               <a
                 href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-ink"
+                className="inline-flex text-muted transition-colors hover:text-ink"
+                aria-label="GitHub"
+                title="GitHub"
               >
                 <GitHubIcon className="size-4" />
-                GitHub
-                <ArrowUpRight aria-hidden="true" className="size-3" />
               </a>
               <a
                 href={profile.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-ink"
+                className="inline-flex text-muted transition-colors hover:text-ink"
+                aria-label="LinkedIn"
+                title="LinkedIn"
               >
                 <LinkedInIcon className="size-4" />
-                LinkedIn
-                <ArrowUpRight aria-hidden="true" className="size-3" />
               </a>
             </div>
           </div>
@@ -176,10 +170,10 @@ export function HomePage() {
             </ol>
             <div className="mt-2 border-t border-line pt-4">
               <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-muted">
-                Delivery loop
+                How I build reliable AI
               </p>
               <p className="mt-2 text-xs leading-relaxed text-muted">
-                Signal → evidence → explanation → action → evaluation
+                Data → Retrieval / model → Guardrails → Evaluation → Product workflow
               </p>
             </div>
           </aside>
@@ -191,14 +185,31 @@ export function HomePage() {
           <SectionHeading
             id="selected-work-heading"
             eyebrow="Selected work"
-            title="Systems built to support decisions."
-            description="Each project below states what exists today, what is still being built, and how the work is evaluated. No metrics are published without a documented methodology."
+            title="Selected systems, built for real-world use."
+            description="Evidence, limitations, and implementation status are documented for every project."
           />
           <div className="grid gap-5 lg:grid-cols-2">
-            {projects.map((project, index) => (
+            {featuredProjects.map((project, index) => (
               <ProjectCard key={project.slug} project={project} index={index} />
             ))}
           </div>
+          {currentlyBuilding ? (
+            <div className="mt-5 rounded-2xl border border-amber-500/30 bg-surface-2 p-5 sm:flex sm:items-start sm:justify-between sm:gap-6">
+              <div>
+                <p className="section-label">Currently building</p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight">{currentlyBuilding.name}</h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+                  {currentlyBuilding.statusNote}
+                </p>
+              </div>
+              <Link
+                to="/projects/jaheeratech/"
+                className="mt-4 inline-flex shrink-0 items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink sm:mt-0"
+              >
+                View status <ArrowRight aria-hidden="true" className="size-4" />
+              </Link>
+            </div>
+          ) : null}
           <div className="mt-8">
             <ButtonLink to="/projects/" variant="secondary">
               View all projects
@@ -215,13 +226,13 @@ export function HomePage() {
               <div className="p-7 sm:p-10 lg:p-12">
                 <p className="section-label flex items-center gap-3">
                   <span aria-hidden="true" className="h-px w-8 bg-lime" />
-                  Cognitive OS · Interactive laboratory
+                  Interactive AI Lab · Cognitive OS
                 </p>
                 <h2
                   id="cognitive-os-heading"
                   className="mt-5 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl"
                 >
-                  Don't just read how I think. Test it.
+                  Test how I reason about AI systems.
                 </h2>
                 <p className="mt-5 max-w-xl text-base leading-relaxed text-muted">
                   Investigate real-world-style problems, challenge assumptions, inspect evidence,
@@ -229,17 +240,17 @@ export function HomePage() {
                 </p>
                 <div className="mt-8">
                   <ButtonLink to="/cognitive-os/">
-                    Enter the laboratory
+                    Enter Interactive AI Lab
                     <ArrowRight aria-hidden="true" className="size-4" />
                   </ButtonLink>
                 </div>
                 <p className="mt-5 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-muted">
-                  Deterministic · No LLM required · Data sources labelled
+                  Browser-native · Deterministic · Synthetic sources labelled
                 </p>
               </div>
 
               <div className="border-t border-line bg-surface-2/50 p-7 sm:p-10 lg:border-l lg:border-t-0 lg:p-12">
-                <p className="section-label">Cognitive OS challenges</p>
+                <p className="section-label">Interactive AI Lab exercises</p>
                 <ul className="mt-5 space-y-3">
                   {challengePreviews.map((challenge) => (
                     <li key={challenge.title}>
@@ -350,8 +361,8 @@ export function HomePage() {
           <SectionHeading
             id="open-source-heading"
             eyebrow="Open source"
-            title="Selected repositories."
-            description="Public code with documented scope and limitations. Repository descriptions are verified; results are not published until their methodology is checked."
+            title="Open-source evidence."
+            description="Public code that supports the systems above, with scope and limitations stated plainly."
           />
           <ul className="grid gap-3 sm:grid-cols-2">
             {openSource.map((item) => (

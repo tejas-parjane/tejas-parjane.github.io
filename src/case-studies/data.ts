@@ -95,7 +95,7 @@ export const caseStudies: ProjectCaseStudy[] = [
   {
     slug: 'attention-os',
     title: 'Attention-OS',
-    status: 'implemented',
+    status: 'live-demo',
     statusNote:
       'Independent project on synthetic behavioural data. Metrics are verified from the repository evaluation log; synthetic data and a small held-out test set limit interpretation.',
     verification: {
@@ -245,7 +245,7 @@ export const caseStudies: ProjectCaseStudy[] = [
   {
     slug: 'forecasting-engine',
     title: 'Forecasting & Decision Intelligence Engine',
-    status: 'implemented',
+    status: 'live-demo',
     statusNote:
       'Independent project on a synthetic single series. Metrics are verified from the recorded backtest artifact; validation windows are roughly 109–110 observations, not a 30-step horizon.',
     verification: {
@@ -387,7 +387,7 @@ export const caseStudies: ProjectCaseStudy[] = [
   {
     slug: 'agentci',
     title: 'AgentCI',
-    status: 'in-development',
+    status: 'open-source-alpha',
     statusNote: 'Early public alpha (v0.1.1). Not production-ready; no hosted demo.',
     verification: {
       level: 'verified-from-source',

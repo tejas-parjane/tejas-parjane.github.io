@@ -8,7 +8,7 @@ const architectureLayers = [
     name: 'Presentation',
     description:
       'React and TypeScript components for layout, navigation, themes, charts, and interactive controls.',
-    status: 'implemented' as const,
+    status: 'verified' as const,
   },
   {
     name: 'Domain logic',
@@ -26,13 +26,13 @@ const architectureLayers = [
     name: 'Testing',
     description:
       'Unit tests for calculations and state transitions, component tests for interaction, and end-to-end checks for critical journeys.',
-    status: 'implemented' as const,
+    status: 'verified' as const,
   },
   {
     name: 'Deployment',
     description:
       'Static build through GitHub Actions to GitHub Pages, with direct-route fallback and verified asset paths.',
-    status: 'implemented' as const,
+    status: 'verified' as const,
   },
 ]
 

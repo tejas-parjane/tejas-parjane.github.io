@@ -94,22 +94,19 @@ export function CaseStudyView({
 
       <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="space-y-10">
-          <Section id="overview" title="Overview">
+          <Section id="overview" title="What I built">
             <Paragraphs items={study.overview} />
           </Section>
 
-          <Section id="problem" title="Problem and intended outcome">
-            <h3 className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-muted">
-              Problem
-            </h3>
-            <div className="mt-3">
-              <Paragraphs items={study.problem} />
-            </div>
-            <h3 className="mt-6 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-muted">
-              Intended outcome
-            </h3>
-            <div className="mt-3">
-              <Paragraphs items={study.intendedOutcome} />
+          <Section id="problem" title="Problem">
+            <Paragraphs items={study.problem} />
+            <div className="mt-6 border-l-2 border-lime pl-4">
+              <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-muted">
+                Intended outcome
+              </p>
+              <div className="mt-3">
+                <Paragraphs items={study.intendedOutcome} />
+              </div>
             </div>
           </Section>
 
@@ -128,11 +125,11 @@ export function CaseStudyView({
             </div>
           </Section>
 
-          <Section id="architecture" title="Architecture and data flow">
+          <Section id="architecture" title="Technical decisions">
             <ArchitectureFlow steps={study.architecture} />
           </Section>
 
-          <Section id="implementation" title="Implementation status">
+          <Section id="implementation" title="Evidence">
             <ImplementationStatus implementation={implementation} />
           </Section>
 
@@ -150,7 +147,7 @@ export function CaseStudyView({
             </Section>
           ) : null}
 
-          <Section id="evaluation" title="Evaluation methodology">
+          <Section id="evaluation" title="Evaluation evidence">
             <Bullets items={evaluation.methodology} />
             {evaluation.caveats.length > 0 ? (
               <div className="mt-6 rounded-2xl border border-line bg-surface-2 p-5">
@@ -174,11 +171,11 @@ export function CaseStudyView({
             </Section>
           ) : null}
 
-          <Section id="results" title="Results and interpretation">
+          <Section id="results" title="Results">
             <Paragraphs items={study.results} />
           </Section>
 
-          <Section id="limitations" title="Limitations and failure modes">
+          <Section id="limitations" title="Limitations">
             <h3 className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-muted">
               Limitations
             </h3>
@@ -197,7 +194,7 @@ export function CaseStudyView({
             <Bullets items={study.nextImprovements} />
           </Section>
 
-          <Section id="sources" title="Sources and links">
+          <Section id="sources" title="Links">
             <div className="flex flex-wrap gap-3">
               {study.links.map((link) => (
                 <SourceLink key={`${link.kind}-${link.href}`} link={link} />

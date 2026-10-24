@@ -66,6 +66,13 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
 
       <p className="mt-4 text-sm leading-relaxed">{project.description}</p>
 
+      <div className="mt-4 border-l-2 border-lime pl-3">
+        <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-muted">
+          Startup relevance
+        </p>
+        <p className="mt-1 text-xs leading-relaxed text-muted">{project.startupRelevance}</p>
+      </div>
+
       <div className="mt-5 rounded-xl border border-line bg-surface-2 px-3 py-2.5">
         <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-muted">
           Implementation status

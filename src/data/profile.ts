@@ -11,14 +11,14 @@ export interface Profile {
 
 export const profile: Profile = {
   name: 'Tejas Parjane',
-  role: 'AI Engineering · Data Science · Product',
+  role: 'Applied AI Engineer · Evaluated systems · Product delivery',
   location: 'Pune, Maharashtra, India',
   email: 'tejasparjane7334@gmail.com',
   github: 'https://github.com/tejas-parjane',
   linkedin: 'https://www.linkedin.com/in/tejas-parjane/',
-  headline: 'From data to intelligence. From intelligence to products.',
+  headline: 'I build evaluated AI systems that turn data into trustworthy decisions and usable products.',
   supportingCopy:
-    "I'm Tejas Parjane. I build data-driven systems and AI-powered applications that help people make better decisions. My work spans machine learning, experimentation, AI workflows, and the engineering required to turn ideas into usable products.",
+    'I design and ship AI decision systems—from data and model evaluation to reliable APIs and product workflows.',
 }
 
 export const resume = {

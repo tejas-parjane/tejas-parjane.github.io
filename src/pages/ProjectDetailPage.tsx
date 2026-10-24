@@ -39,10 +39,10 @@ function CaseStudyInProgress({ project }: { project: Project }) {
 
       <h2 className="mt-10 text-2xl font-semibold tracking-tight">Case study in progress</h2>
       <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
-        A detailed case study for this project is being prepared. It will separate implemented
-        functionality from planned work, document the evaluation methodology, and state limitations
-        rather than only presenting results. The verified links below point to the current
-        implementation.
+        A detailed case study for this project is being prepared. It will separate documented
+        behaviour from work still in development, provide reproducible evidence where available,
+        and state limitations rather than only presenting results. The links below point to the
+        current public implementation.
       </p>
 
       {externalLinks.length > 0 ? (
@@ -74,7 +74,7 @@ export function ProjectDetailPage() {
   useDocumentMeta(
     project ? `${project.name} — Tejas Parjane` : 'Project not found — Tejas Parjane',
     project
-      ? `${project.tagline}. ${study ? study.statusNote : 'Implementation status and case-study progress.'}`
+      ? `${project.tagline}. ${study ? study.statusNote : 'Project status and case-study progress.'}`
       : 'The requested project could not be found.',
   )
 

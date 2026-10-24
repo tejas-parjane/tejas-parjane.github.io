@@ -3,9 +3,10 @@ import { statusLabels } from '@/data/projects'
 import { cn } from '@/lib/cn'
 
 const dotStyles: Record<ProjectStatus, string> = {
-  implemented: 'bg-lime',
+  verified: 'bg-lime',
+  'live-demo': 'bg-sky-400',
+  'open-source-alpha': 'bg-violet-400',
   'in-development': 'bg-amber-500',
-  planned: 'bg-muted',
 }
 
 export function StatusBadge({

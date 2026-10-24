@@ -1,8 +1,8 @@
-# Tejas Parjane — Portfolio + Cognitive OS
+# Tejas Parjane — Applied AI Engineer Portfolio
 
-A static, responsive portfolio for Tejas Parjane covering AI engineering, data science, and product building, plus an interactive, browser-only decision-intelligence laboratory called **Cognitive OS**.
+A static, responsive portfolio for Tejas Parjane, an Applied AI Engineer building evaluated AI systems, reliable APIs, and decision workflows for startup teams. It includes a browser-native **Interactive AI Lab** (internally named Cognitive OS) that demonstrates evidence-based decision making.
 
-The site is deliberately honest about implementation status: it does not publish unverified metrics, fabricated project links, or simulated results presented as live outcomes.
+The site is deliberately honest about implementation status: each project is labeled `Verified`, `Live demo`, `Open-source alpha`, or `In development`; it does not publish unverified metrics, fabricated project links, or simulated results presented as live outcomes.
 
 ## Stack
 
@@ -42,12 +42,12 @@ npm run test:e2e
 
 | Route | Status |
 | --- | --- |
-| `/` | Implemented |
-| `/projects/` | Implemented |
-| `/projects/jaheeratech/` | Implemented case study (Phase 2) |
-| `/projects/attention-os/` | Implemented case study (Phase 2) |
-| `/projects/forecasting-engine/` | Implemented case study (Phase 2) |
-| `/projects/agentci/` | Implemented case study (Phase 2) |
+| `/` | Startup-focused homepage with three flagship projects |
+| `/projects/` | Full project index with status and evidence |
+| `/projects/jaheeratech/` | In-development case study |
+| `/projects/attention-os/` | Live-demo case study |
+| `/projects/forecasting-engine/` | Live-demo case study |
+| `/projects/agentci/` | Open-source-alpha case study |
 | `/cognitive-os/` | Laboratory overview; all three challenges live |
 | `/cognitive-os/business-diagnosis/` | Implemented interactive challenge (Phase 3) |
 | `/cognitive-os/agent-autopsy/` | Implemented interactive challenge (Phase 4) |
@@ -80,7 +80,7 @@ If a custom domain (for example `tejasparjane.in`) is configured in **Settings �
 ## Content and data integrity
 
 - `src/data/profile.ts` — verified contact details.
-- `src/data/projects.ts` — project metadata with explicit `implemented` / `in-development` / `planned` status and verified links.
+- `src/data/projects.ts` — project metadata with explicit status, startup relevance, and public links.
 - `src/data/experience.ts` — professional history from the current resume.
 - `src/case-studies/types.ts` — typed contract for the Phase 2 case studies.
 - `src/cognitive-os/types.ts` — shared challenge contract (steps, evidence, hypotheses, decision targets, scoring, decision records).

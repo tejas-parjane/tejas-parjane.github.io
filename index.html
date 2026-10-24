@@ -8,23 +8,18 @@
         try {
           var key = 'tejas-theme'
           var saved = localStorage.getItem(key)
-          var theme =
-            saved === 'light' || saved === 'dark'
-              ? saved
-              : window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 'dark'
-                : 'light'
+          var theme = saved === 'light' || saved === 'dark' ? saved : 'dark'
           document.documentElement.dataset.theme = theme
           document.documentElement.style.colorScheme = theme
         } catch (error) {
-          document.documentElement.dataset.theme = 'light'
+          document.documentElement.dataset.theme = 'dark'
         }
       })()
     </script>
-    <title>Tejas Parjane — AI Engineering, Data Science, Product</title>
+    <title>Tejas Parjane — Applied AI Engineer</title>
     <meta
       name="description"
-      content="Tejas Parjane builds data-driven systems and AI-powered applications across machine learning, experimentation, AI workflows, and product engineering."
+      content="Tejas Parjane builds evaluated AI systems, reliable APIs, and decision workflows for startup teams."
     />
     <meta name="author" content="Tejas Parjane" />
     <meta name="color-scheme" content="light dark" />
@@ -35,17 +30,17 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Tejas Parjane" />
-    <meta property="og:title" content="Tejas Parjane — AI Engineering, Data Science, Product" />
+    <meta property="og:title" content="Tejas Parjane — Applied AI Engineer" />
     <meta
       property="og:description"
-      content="From data to intelligence. From intelligence to products. Explore projects and the Cognitive OS decision laboratory."
+      content="Evaluated AI systems, reliable APIs, and decision workflows for startup teams."
     />
     <meta property="og:url" content="https://tejas-parjane.github.io/" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Tejas Parjane — AI Engineering, Data Science, Product" />
+    <meta name="twitter:title" content="Tejas Parjane — Applied AI Engineer" />
     <meta
       name="twitter:description"
-      content="From data to intelligence. From intelligence to products."
+      content="Evaluated AI systems, reliable APIs, and decision workflows for startup teams."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />

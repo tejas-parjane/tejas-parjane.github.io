@@ -5,9 +5,8 @@ import {
   type Theme,
 } from '@/app/theme-context'
 
-function systemTheme(): Theme {
-  if (typeof window === 'undefined' || !window.matchMedia) return 'light'
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+function defaultTheme(): Theme {
+  return 'dark'
 }
 
 function storedTheme(): Theme | null {
@@ -31,7 +30,7 @@ function applyTheme(theme: Theme): void {
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(
-    () => storedTheme() ?? currentDocumentTheme() ?? systemTheme(),
+    () => storedTheme() ?? currentDocumentTheme() ?? defaultTheme(),
   )
 
   useEffect(() => {

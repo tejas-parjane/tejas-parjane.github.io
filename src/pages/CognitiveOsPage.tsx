@@ -47,14 +47,14 @@ const loop = [
 
 export function CognitiveOsPage() {
   useDocumentMeta(
-    'Cognitive OS — Tejas Parjane',
+    'Interactive AI Lab — Tejas Parjane',
     'An interactive laboratory for investigating problems with evidence, hypotheses, experiments, and explicit decision criteria. Deterministic and browser-only.',
   )
 
   return (
     <>
       <PageHeader
-        eyebrow="Cognitive OS · Interactive laboratory"
+        eyebrow="Interactive AI Lab · Cognitive OS"
         title="Investigate. Challenge. Decide."
         description="A structured environment for examining problems the way an analyst should: separate evidence from explanation, test assumptions, and state what remains uncertain."
       >

@@ -33,6 +33,6 @@ describe('ProjectCard', () => {
       'href',
       '/projects/attention-os/',
     )
-    expect(screen.getByText('Implemented')).toBeInTheDocument()
+    expect(screen.getByText('Live demo')).toBeInTheDocument()
   })
 })

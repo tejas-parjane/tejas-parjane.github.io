@@ -6,16 +6,16 @@ import { getCaseStudyBySlug } from '@/case-studies/data'
 import type { ProjectCaseStudy } from '@/case-studies/types'
 
 const requiredHeadings = [
-  'Overview',
-  'Problem and intended outcome',
+  'What I built',
+  'Problem',
   'Constraints and assumptions',
-  'Architecture and data flow',
-  'Implementation status',
-  'Evaluation methodology',
-  'Results and interpretation',
-  'Limitations and failure modes',
+  'Technical decisions',
+  'Evidence',
+  'Evaluation evidence',
+  'Results',
+  'Limitations',
   'What I would improve next',
-  'Sources and links',
+  'Links',
 ]
 
 function renderStudy(slug: string) {

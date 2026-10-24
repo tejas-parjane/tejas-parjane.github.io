@@ -8,16 +8,16 @@ import { useDocumentMeta } from '@/hooks/useDocumentMeta'
 
 export function ProjectsPage() {
   useDocumentMeta(
-    'Projects — Tejas Parjane',
-    'Selected AI engineering, data science, and product projects with explicit implementation status and verified links.',
+    'Work — Tejas Parjane',
+    'Applied AI engineering work with explicit implementation status, evidence, and limitations.',
   )
 
   return (
     <>
       <PageHeader
-        eyebrow="Projects"
-        title="Work, with its implementation status attached."
-        description="Every project distinguishes what is implemented, what is in development, and what is planned. Repository and demo links are verified before publication."
+        eyebrow="Work"
+        title="Applied AI work, with evidence attached."
+        description="Every project states its current status, the evidence available today, and the limitations that remain."
       />
 
       <section aria-labelledby="featured-projects-heading">
@@ -44,11 +44,11 @@ export function ProjectsPage() {
               id="supporting-projects-heading"
               className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl"
             >
-              Repositories under verification.
+              Supporting work.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              These projects are public, but their implementation details and results have not yet
-              been verified for a case study. They are listed with that limitation.
+              Public repositories that support the core portfolio story. Their current verification
+              status is stated directly rather than inferred from a technology list.
             </p>
           </div>
 

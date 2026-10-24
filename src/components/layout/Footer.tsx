@@ -7,9 +7,8 @@ import { profile } from '@/data/profile'
 const currentYear = new Date().getFullYear()
 
 const footerLinks = [
-  { label: 'Projects', to: '/projects/' },
-  { label: 'Cognitive OS', to: '/cognitive-os/' },
-  { label: 'Engineering', to: '/engineering/' },
+  { label: 'Work', to: '/projects/' },
+  { label: 'Interactive AI Lab', to: '/cognitive-os/' },
   { label: 'Experience', to: '/experience/' },
   { label: 'About', to: '/about/' },
 ]
