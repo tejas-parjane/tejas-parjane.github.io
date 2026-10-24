@@ -8,8 +8,7 @@ import { cn } from '@/lib/cn'
 
 const navigation = [
   { label: 'Work', to: '/projects/' },
-  { label: 'Interactive AI Lab', to: '/cognitive-os/' },
-  { label: 'Experience', to: '/experience/' },
+  { label: 'AI Lab', to: '/cognitive-os/' },
   { label: 'About', to: '/about/' },
 ]
 

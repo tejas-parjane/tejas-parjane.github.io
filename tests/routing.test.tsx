@@ -19,9 +19,9 @@ describe('application routes', () => {
   it('renders the homepage', () => {
     renderAt('/')
     expect(
-      screen.getByRole('heading', { level: 1, name: /evaluated ai systems/i }),
+      screen.getByRole('heading', { level: 1, name: /i build ai that works/i }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /test how i reason/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /want to see how i think/i })).toBeInTheDocument()
   })
 
   it('renders the projects index', () => {
@@ -79,7 +79,7 @@ describe('primary navigation', () => {
       </ThemeProvider>,
     )
 
-    for (const label of ['Work', 'Interactive AI Lab', 'Experience', 'About']) {
+    for (const label of ['Work', 'AI Lab', 'About']) {
       expect(screen.getAllByRole('link', { name: label }).length).toBeGreaterThan(0)
     }
 
