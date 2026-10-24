@@ -58,7 +58,11 @@ export function Footer() {
             <ul className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 text-sm md:grid-cols-1">
               {footerLinks.map((item) => (
                 <li key={item.to}>
-                  <Link to={item.to} className="text-muted transition-colors hover:text-ink">
+                  <Link
+                    to={item.to}
+                    className="text-muted transition-colors hover:text-ink"
+                    aria-label={item.label === 'Interactive AI Lab' ? 'AI Lab' : item.label}
+                  >
                     {item.label}
                   </Link>
                 </li>
