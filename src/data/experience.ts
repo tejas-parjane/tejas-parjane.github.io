@@ -16,12 +16,12 @@ export interface EducationItem {
 
 export const experience: ExperienceItem[] = [
   {
-    company: 'Building In — Stealth AI Startup',
+    company: 'Building jaheeratech.com',
     role: 'Data & Analytics Engineer',
     period: 'Apr 2026 — Present',
     current: true,
     summary:
-      'Building data and analytics foundations for an AI campaign operating system for digital advertising.',
+      'Building an AI-powered advertising campaign platform that helps teams understand performance and decide what to do next.',
     highlights: [
       'Building an AI campaign operating system that connects advertising platforms such as Meta Ads with analytics and automation workflows.',
       'Designing the underlying data layer end to end: schema, transformation logic, and metric definitions for campaign performance tracking.',
