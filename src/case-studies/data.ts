@@ -207,7 +207,7 @@ export const caseStudies: ProjectCaseStudy[] = [
       caveats: [
         'All figures come from synthetic data. They are not results from real users or a deployed commercial product.',
         'The held-out test set has 75 users and the monetization test set has 13 positives, so estimates have wide uncertainty.',
-        'The repository README contains one sentence stating the model is chosen on test ROC-AUC. This conflicts with the split documentation, the evaluation log, and the code; those sources say selection is on validation ROC-AUC, which is the method described here.',
+        'Earlier, one README sentence said selection used test ROC-AUC, and the batch prediction script loaded the XGBoost file by name. Both were corrected on 26 Oct 2026 to match the validation-based selection. The committed predictions file was generated before that script fix and has not been regenerated.',
       ],
     },
     results: [
@@ -480,4 +480,4 @@ export const caseStudies: ProjectCaseStudy[] = [
 
 export function getCaseStudyBySlug(slug: string): ProjectCaseStudy | undefined {
   return caseStudies.find((study) => study.slug === slug)
-}
+              }
