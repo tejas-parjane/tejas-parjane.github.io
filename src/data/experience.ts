@@ -17,7 +17,7 @@ export interface EducationItem {
 export const experience: ExperienceItem[] = [
   {
     company: 'Building jaheeratech.com',
-    role: 'Data & Analytics Engineer',
+    role: 'AI Engineer',
     period: 'Apr 2026 — Present',
     current: true,
     summary:
