@@ -124,7 +124,7 @@ export const projects: Project[] = [
       { kind: 'repository', label: 'Repository', href: 'https://github.com/tejas-parjane/customer-cohort-intelligence' },
       { kind: 'case-study', label: 'Case study', href: '/projects/customer-cohort-intelligence/' },
     ],
-    featured: false,
+    featured: true,
   },
   {
     slug: 'jaheeratech',

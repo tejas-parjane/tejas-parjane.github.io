@@ -11,7 +11,7 @@ describe('case-study data integrity', () => {
   it('provides exactly one case study for every featured project', () => {
     const studySlugs = caseStudies.map((study) => study.slug)
 
-    expect(caseStudies).toHaveLength(4)
+    expect(caseStudies).toHaveLength(5)
     expect(new Set(studySlugs).size).toBe(studySlugs.length)
     for (const project of projects.filter((item) => item.featured)) {
       if (project.slug === 'business-intelligent-rag-agent') continue

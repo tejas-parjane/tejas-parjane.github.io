@@ -2,6 +2,100 @@ import type { ProjectCaseStudy } from '@/case-studies/types'
 
 export const caseStudies: ProjectCaseStudy[] = [
   {
+    slug: 'customer-cohort-intelligence',
+    title: 'Customer Cohort & Purchase Intelligence',
+    status: 'verified',
+    statusNote:
+      'Source-backed analytics prototype using reproducible synthetic skincare data. No durable public demo or real-business results are published.',
+    verification: {
+      level: 'verified-from-source',
+      note: 'Scope and implementation were checked against the public repository README. Data and revenue figures are synthetic and must not be interpreted as real customer or business results.',
+    },
+    atAGlance: [
+      { label: 'Type', value: 'Rule-based customer cohort and purchase analytics prototype' },
+      { label: 'Data', value: 'Synthetic skincare customers, orders, and order items' },
+      { label: 'Scale', value: '10,000 synthetic customers; approximately 40,000–45,000 orders' },
+      { label: 'Methods', value: 'Data validation, cleaning, SQL-style aggregation, deterministic rules' },
+      { label: 'Demo', value: 'No durable public demo configured' },
+    ],
+    overview: [
+      'Customer Cohort & Purchase Intelligence turns synthetic skincare customer and transaction records into explainable customer cohorts. The prototype demonstrates data modelling, cleaning, validation, aggregation, boundary testing, and an analytics interface without machine learning.',
+      'It makes data-quality issues visible and documents how those issues affect purchase metrics and cohort labels, rather than silently presenting synthetic outputs as business outcomes.',
+    ],
+    problem: [
+      'A business needs to understand customer value, purchase frequency, recency, lifecycle, revenue contribution, and which segments may warrant follow-up.',
+      'Duplicates, missing identifiers, invalid dates and line amounts, refunds, cancellations, and multi-item orders can distort those views if their treatment is not explicit.',
+    ],
+    intendedOutcome: [
+      'Provide deterministic, explainable customer segments and cohort summaries, with visible data-quality treatment and tools to inspect or export a filtered customer view.',
+    ],
+    constraints: [
+      'All customer, order, product, and revenue records are synthetic and generated for demonstration.',
+      'The configured revenue policy excludes tax and shipping and excludes cancelled orders from purchase metrics.',
+      'Only supported INR transactions qualify; no foreign-exchange conversion is performed.',
+      'A durable public demo and real-business evaluation are not available.',
+    ],
+    assumptions: [
+      'The README documents the intended public implementation and is the source of truth for this summary.',
+      'Cohort labels are descriptive rules, not predictions or causal explanations.',
+    ],
+    architecture: [
+      { step: 'Generate', detail: 'Create reproducible synthetic customer, order, and order-item records with a fixed seed and demo end date.' },
+      { step: 'Validate', detail: 'Check schemas, keys, dates, amounts, currencies, relationships, and report data-quality issues.' },
+      { step: 'Normalize', detail: 'Apply documented de-duplication, revenue, discount-allocation, and qualifying-order policies.' },
+      { step: 'Aggregate', detail: 'Build customer-level purchase features and deterministic value, frequency, recency, and lifecycle segments.' },
+      { step: 'Explore', detail: 'Show cohort distributions and revenue contribution; support filtering, search, sorting, pagination, export, and threshold previews.' },
+    ],
+    implementation: {
+      implemented: [
+        'Reproducible synthetic skincare customer and transaction data',
+        'Schema, relationship, date, amount, and currency validation with data-quality reporting',
+        'Documented record normalization and net merchandise revenue policies',
+        'Deterministic value, frequency, recency, lifecycle, and combined cohort labels with explanations',
+        'Overview metrics, cohort distributions, customer filtering, export, and threshold previews',
+        'Boundary-focused tests for the rule-based analytics',
+      ],
+      inDevelopment: [
+        'Durable public demo deployment requiring owner authorization in Streamlit Community Cloud',
+      ],
+      planned: [],
+    },
+    evaluation: {
+      methodology: [
+        'The repository documents fixed-seed synthetic data, explicit cleaning and revenue policies, and automated tests including boundary checks. This is implementation verification, not evidence of real-world business performance.',
+      ],
+      metricGroups: [],
+      caveats: [
+        'Every customer and revenue figure is fictional; no real user population or brand performance is represented.',
+        'Cohort labels depend on the declared thresholds and qualifying-order rules.',
+        'No benchmark or production impact evaluation is published.',
+      ],
+    },
+    results: [
+      'The prototype provides a reproducible and inspectable workflow for turning imperfect transaction records into explainable rule-based customer cohorts.',
+    ],
+    limitations: [
+      'Synthetic data cannot establish that the segment thresholds or findings generalize to a real business.',
+      'No durable hosted demo is configured.',
+      'Rule-based cohort labels are descriptive and do not estimate causal effects or future customer behaviour.',
+    ],
+    failureModes: [
+      'Treating synthetic revenue or customer counts as real business results.',
+      'Changing qualifying-order or discount policies without explaining their effect on cohort summaries.',
+      'Interpreting rule-based segments as predictive scores or causal findings.',
+      'Ignoring unresolved customers, invalid dates, or excluded transaction records when comparing totals.',
+    ],
+    nextImprovements: [
+      'Authorize and publish the documented Streamlit demo deployment.',
+      'Add a reproducible evaluation narrative that keeps synthetic-data limitations prominent.',
+      'Validate threshold choices with a real, appropriately governed dataset before using them operationally.',
+    ],
+    links: [
+      { label: 'Repository', href: 'https://github.com/tejas-parjane/customer-cohort-intelligence', kind: 'repository' },
+      { label: 'README', href: 'https://github.com/tejas-parjane/customer-cohort-intelligence/blob/main/README.md', kind: 'source' },
+    ],
+  },
+  {
     slug: 'jaheeratech',
     title: 'JaheeraTech',
     status: 'in-development',
