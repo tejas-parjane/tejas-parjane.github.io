@@ -1,204 +1,30 @@
-import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react'
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Mail } from 'lucide-react'
+import { GitHubIcon as Github, LinkedInIcon as Linkedin } from '@/components/ui/BrandIcons'
 import { Link } from 'react-router-dom'
 import { Container } from '@/components/layout/Container'
-import { GitHubIcon, LinkedInIcon } from '@/components/ui/BrandIcons'
 import { ButtonLink } from '@/components/ui/ButtonLink'
-import { profile, resume } from '@/data/profile'
+import { capabilities } from '@/data/capabilities'
 import { experience } from '@/data/experience'
+import { profile } from '@/data/profile'
 import { projects } from '@/data/projects'
 import { useDocumentMeta } from '@/hooks/useDocumentMeta'
 
-const selectedProjects = ['agentci', 'attention-os', 'forecasting-engine']
-  .map((slug) => projects.find((project) => project.slug === slug))
-  .filter((project) => project !== undefined)
+const selected = ['jaheeratech', 'business-intelligent-rag-agent', 'forecasting-engine', 'customer-cohort-intelligence']
+  .map((slug) => projects.find((project) => project.slug === slug)).filter(Boolean)
 
 export function HomePage() {
-  useDocumentMeta(
-    'Tejas Parjane — Applied AI Engineer',
-    'Tejas Parjane builds evaluated AI systems, reliable APIs, and decision workflows for startup teams.',
-  )
-
-  return (
-    <>
-      <section className="border-b border-line" aria-labelledby="hero-heading">
-        <Container className="py-20 sm:py-28 lg:py-36">
-          <div className="max-w-3xl">
-            <p className="section-label">Applied AI engineer · Pune, India</p>
-            <h1
-              id="hero-heading"
-              className="mt-6 text-5xl font-semibold leading-[1.04] tracking-[-0.04em] sm:text-7xl"
-            >
-              I build AI that works <span className="text-muted">in the real world.</span>
-            </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-muted">
-              {profile.supportingCopy} I care about evidence, reliability, and making complex
-              systems useful.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <ButtonLink href={`mailto:${profile.email}`}>
-                <Mail aria-hidden="true" className="size-4" />
-                Get in touch
-              </ButtonLink>
-              <ButtonLink to="/projects/" variant="secondary">
-                See my work <ArrowRight aria-hidden="true" className="size-4" />
-              </ButtonLink>
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex size-10 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-2 hover:text-ink"
-                aria-label="GitHub"
-              >
-                <GitHubIcon className="size-5" />
-              </a>
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex size-10 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-2 hover:text-ink"
-                aria-label="LinkedIn"
-              >
-                <LinkedInIcon className="size-5" />
-              </a>
-            </div>
-            <p className="mt-6 text-sm text-muted">
-              {resume.note}{' '}
-              <Link to={resume.path} className="link-underline text-ink">
-                Request my résumé
-              </Link>
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      <section aria-labelledby="work-heading">
-        <Container className="py-16 sm:py-24">
-          <div className="flex flex-wrap items-end justify-between gap-5">
-            <div>
-              <p className="section-label">Selected work</p>
-              <h2 id="work-heading" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-                A few things I’ve built.
-              </h2>
-            </div>
-            <Link
-              to="/projects/"
-              className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-ink"
-            >
-              All projects <ArrowRight aria-hidden="true" className="size-4" />
-            </Link>
-          </div>
-
-          <div className="mt-10 divide-y divide-line border-y border-line">
-            {selectedProjects.map((project) => {
-              const repository = project.links.find((link) => link.kind === 'repository')
-              const caseStudy = project.links.find((link) => link.kind === 'case-study')
-              return (
-                <article
-                  key={project.slug}
-                  className="grid gap-4 py-7 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-8"
-                >
-                  <div>
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <h3 className="text-xl font-semibold tracking-tight">{project.name}</h3>
-                      <span className="rounded-full border border-line px-2.5 py-1 font-mono text-[0.625rem] uppercase tracking-[0.1em] text-muted">
-                        {project.status.replaceAll('-', ' ')}
-                      </span>
-                    </div>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-4 text-sm">
-                    {repository ? (
-                      <a
-                        href={repository.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-ink"
-                      >
-                        GitHub <ArrowUpRight aria-hidden="true" className="size-3.5" />
-                      </a>
-                    ) : null}
-                    {caseStudy ? (
-                      <Link
-                        to={caseStudy.href}
-                        className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-ink"
-                      >
-                        Details <ArrowRight aria-hidden="true" className="size-3.5" />
-                      </Link>
-                    ) : null}
-                  </div>
-                </article>
-              )
-            })}
-          </div>
-        </Container>
-      </section>
-
-      <section className="border-y border-line bg-surface-2/50" aria-labelledby="lab-heading">
-        <Container className="flex flex-col gap-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:py-16">
-          <div className="max-w-2xl">
-            <p className="section-label">A small interactive demo</p>
-            <h2 id="lab-heading" className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
-              Want to see how I think through a problem?
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              Try the AI Lab: short, deterministic exercises using clearly labelled synthetic data.
-            </p>
-          </div>
-          <ButtonLink to="/cognitive-os/" variant="secondary" className="shrink-0">
-            Explore the AI Lab <ArrowRight aria-hidden="true" className="size-4" />
-          </ButtonLink>
-        </Container>
-      </section>
-
-      <section aria-labelledby="experience-heading">
-        <Container className="py-16 sm:py-24">
-          <p className="section-label">Experience</p>
-          <h2 id="experience-heading" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-            Work that shaped my approach.
-          </h2>
-          <ol className="mt-8 divide-y divide-line border-y border-line">
-            {experience.map((item) => (
-              <li
-                key={`${item.company}-${item.period}`}
-                className="grid gap-2 py-5 sm:grid-cols-[minmax(220px,0.7fr)_1.3fr] sm:gap-8"
-              >
-                <div>
-                  <p className="text-sm font-semibold">{item.company}</p>
-                  <p className="mt-1 text-sm text-muted">{item.role}</p>
-                </div>
-                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6">
-                  <p className="text-sm leading-relaxed text-muted">{item.summary}</p>
-                  <span className="shrink-0 font-mono text-xs text-muted">{item.period}</span>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-6 flex flex-wrap gap-5 text-sm">
-            <Link to="/experience/" className="link-underline">
-              More experience
-            </Link>
-            <Link to="/about/" className="link-underline">
-              About me
-            </Link>
-          </div>
-        </Container>
-      </section>
-
-      <section className="border-t border-line" aria-labelledby="contact-heading">
-        <Container className="flex flex-col gap-5 py-12 sm:flex-row sm:items-center sm:justify-between sm:py-16">
-          <div>
-            <p className="section-label">Contact</p>
-            <h2 id="contact-heading" className="mt-2 text-2xl font-semibold tracking-tight">
-              Have a problem worth solving?
-            </h2>
-          </div>
-          <ButtonLink href={`mailto:${profile.email}`}>
-            Say hello <ArrowUpRight aria-hidden="true" className="size-4" />
-          </ButtonLink>
-        </Container>
-      </section>
-    </>
-  )
+  useDocumentMeta('Tejas Parjane — AI Engineer, Data Scientist & Product Builder', 'Tejas Parjane builds evidence-grounded AI products, analytical systems, and decision tools.')
+  return <>
+    <section className="border-b border-line" aria-labelledby="hero-heading"><Container className="grid min-h-[calc(100svh-4rem)] content-between py-10 sm:py-14 lg:py-16">
+      <div className="flex justify-between text-xs font-medium uppercase tracking-[0.16em] text-muted"><span>Pune, India · Available for select work</span><span className="hidden sm:block">Scroll to explore</span></div>
+      <div className="py-16 sm:py-20 lg:py-24"><p className="section-label">AI engineer · data scientist · product builder</p><h1 id="hero-heading" className="display-type mt-6 max-w-6xl text-5xl leading-[0.96] tracking-[-0.06em] sm:text-7xl lg:text-[7.4rem]">Intelligence is only useful when it <em className="font-normal text-signal">moves</em> a decision forward.</h1><div className="mt-9 grid max-w-4xl gap-7 border-t border-line pt-6 sm:grid-cols-[1.3fr_0.7fr]"><p className="text-base leading-relaxed text-muted sm:text-lg">{profile.supportingCopy}</p><p className="font-mono text-xs leading-relaxed text-muted">From governed RAG and forecasting systems to advertising intelligence—built with evidence, evaluation, and a clear next action.</p></div><div className="mt-9 flex flex-wrap gap-3"><ButtonLink to="/projects/">View my work <ArrowDownRight aria-hidden="true" className="size-4" /></ButtonLink><ButtonLink to="/contact/" variant="secondary">Work with me <ArrowUpRight aria-hidden="true" className="size-4" /></ButtonLink></div></div>
+      <div className="flex items-end justify-between border-t border-line pt-5"><p className="max-w-xs text-xs leading-relaxed text-muted">I make complex systems legible: what changed, why it matters, and what to do next.</p><ArrowDownRight aria-hidden="true" className="size-7 text-signal" /></div>
+    </Container></section>
+    <section aria-labelledby="work-heading"><Container className="py-16 sm:py-24 lg:py-28"><div className="grid gap-5 border-b border-line pb-7 sm:grid-cols-[1fr_auto] sm:items-end"><div><p className="section-label">01 — selected work</p><h2 id="work-heading" className="display-type mt-3 text-4xl tracking-[-0.05em] sm:text-5xl">Built for a question, not a trend.</h2></div><Link to="/projects/" className="inline-flex items-center gap-2 text-sm font-semibold hover:text-signal">All projects <ArrowRight aria-hidden="true" className="size-4" /></Link></div><div className="divide-y divide-line">{selected.map((project, index) => project && <article key={project.slug} className="group grid gap-5 py-8 sm:grid-cols-[4rem_minmax(0,1fr)_auto] sm:gap-8 sm:py-10"><p className="font-mono text-xs text-muted">0{index + 1}</p><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-signal">{project.tagline}</p><h3 className="display-type mt-2 text-3xl tracking-[-0.045em] sm:text-4xl"><Link to={`/projects/${project.slug}/`} className="group-hover:text-signal">{project.name}</Link></h3><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">{project.description}</p><p className="mt-5 font-mono text-[0.68rem] text-muted">{project.skills.slice(0, 4).join(' · ')}</p></div><Link to={`/projects/${project.slug}/`} aria-label={`Read ${project.name} case study`} className="grid size-11 place-items-center border border-line group-hover:border-signal group-hover:bg-signal group-hover:text-white"><ArrowUpRight aria-hidden="true" className="size-5" /></Link></article>)}</div></Container></section>
+    <section className="border-y border-line bg-ink text-canvas" aria-labelledby="approach-heading"><Container className="py-16 sm:py-24"><div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]"><div><p className="font-mono text-xs uppercase tracking-[0.16em] text-lime">02 — how I work</p><h2 id="approach-heading" className="display-type mt-4 text-4xl leading-[0.98] tracking-[-0.05em] sm:text-5xl">Technical depth, with the product in view.</h2><p className="mt-6 max-w-md text-sm leading-relaxed text-canvas/70">The goal is not an impressive-looking model. It is a reliable system someone can use to make a better decision.</p></div><div className="divide-y divide-canvas/20 border-y border-canvas/20">{capabilities.map((item, i) => <article key={item.title} className="grid gap-3 py-6 sm:grid-cols-[3rem_1fr]"><span className="font-mono text-xs text-lime">0{i + 1}</span><div><h3 className="text-xl font-semibold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-canvas/70">{item.description}</p><p className="mt-4 font-mono text-[0.65rem] text-lime">{item.items.slice(0, 3).join(' · ')}</p></div></article>)}</div></div></Container></section>
+    <section aria-labelledby="case-heading"><Container className="grid gap-10 py-16 sm:py-24 lg:grid-cols-[0.7fr_1.3fr]"><div><p className="section-label">03 — technical case study</p><h2 id="case-heading" className="display-type mt-3 text-4xl tracking-[-0.05em]">A model should not be a black box with better branding.</h2></div><article className="border-l-2 border-signal pl-6 sm:pl-9"><p className="font-mono text-xs uppercase tracking-[0.16em] text-signal">Business Intelligent RAG Agent</p><p className="mt-5 text-xl leading-relaxed sm:text-2xl">An evidence-first analytics agent that keeps database access governed, presents citations, and retains a deterministic fallback when semantic retrieval is unavailable.</p><div className="mt-8 grid gap-5 border-y border-line py-5 sm:grid-cols-3"><p className="text-sm"><strong className="block font-mono text-xs text-muted">BOUNDARY</strong><span className="mt-2 block">No model-authored SQL</span></p><p className="text-sm"><strong className="block font-mono text-xs text-muted">EVIDENCE</strong><span className="mt-2 block">Citations stay visible</span></p><p className="text-sm"><strong className="block font-mono text-xs text-muted">FALLBACK</strong><span className="mt-2 block">Deterministic by design</span></p></div><Link to="/projects/business-intelligent-rag-agent/" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold hover:text-signal">Read the case study <ArrowRight aria-hidden="true" className="size-4" /></Link></article></Container></section>
+    <section className="border-y border-line bg-surface" aria-labelledby="experience-heading"><Container className="py-16 sm:py-24"><p className="section-label">04 — experience</p><h2 id="experience-heading" className="display-type mt-3 text-4xl tracking-[-0.05em] sm:text-5xl">A foundation in data, now applied to products.</h2><ol className="mt-10 divide-y divide-line border-y border-line">{experience.map((item) => <li key={item.company} className="grid gap-3 py-6 sm:grid-cols-[1fr_1.3fr_auto] sm:gap-7"><div><p className="font-semibold">{item.company}</p><p className="mt-1 text-sm text-muted">{item.role}</p></div><p className="text-sm leading-relaxed text-muted">{item.summary}</p><span className="font-mono text-xs text-muted">{item.period}</span></li>)}</ol><Link to="/experience/" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold hover:text-signal">Full experience <ArrowRight aria-hidden="true" className="size-4" /></Link></Container></section>
+    <section aria-labelledby="about-heading"><Container className="grid gap-10 py-16 sm:py-24 lg:grid-cols-2"><div><p className="section-label">05 — about</p><h2 id="about-heading" className="display-type mt-3 text-4xl tracking-[-0.05em] sm:text-5xl">Useful AI starts with honest constraints.</h2></div><div><p className="text-lg leading-relaxed text-muted">I am an AI Engineer and Data Scientist based in Pune. My work sits between reliable engineering and clear business decisions—so systems can be scrutinised, improved, and trusted.</p><Link to="/about/" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold hover:text-signal">More about me <ArrowRight aria-hidden="true" className="size-4" /></Link></div></Container></section>
+    <section className="bg-signal text-white" aria-labelledby="contact-heading"><Container className="grid gap-10 py-16 sm:py-20 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="font-mono text-xs uppercase tracking-[0.16em] text-white/70">06 — get in touch</p><h2 id="contact-heading" className="display-type mt-4 max-w-3xl text-5xl leading-[0.95] tracking-[-0.06em] sm:text-6xl">Have a difficult problem worth making clearer?</h2></div><div className="flex flex-wrap gap-4"><Link to="/contact/" className="inline-flex items-center gap-2 border border-white px-5 py-3 text-sm font-semibold hover:bg-white hover:text-signal">Work with me <ArrowUpRight aria-hidden="true" className="size-4" /></Link><a href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="grid size-11 place-items-center border border-white/60 hover:bg-white hover:text-signal"><Github aria-hidden="true" className="size-5" /></a><a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="grid size-11 place-items-center border border-white/60 hover:bg-white hover:text-signal"><Linkedin aria-hidden="true" className="size-5" /></a><a href={`mailto:${profile.email}`} aria-label="Email Tejas" className="grid size-11 place-items-center border border-white/60 hover:bg-white hover:text-signal"><Mail aria-hidden="true" className="size-5" /></a></div></Container></section>
+  </>
 }

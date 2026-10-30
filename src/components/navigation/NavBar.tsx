@@ -9,7 +9,9 @@ import { cn } from '@/lib/cn'
 const navigation = [
   { label: 'Work', to: '/projects/' },
   { label: 'AI Lab', to: '/cognitive-os/' },
+  { label: 'Experience', to: '/experience/' },
   { label: 'About', to: '/about/' },
+  { label: 'Contact', to: '/contact/' },
 ]
 
 export function NavBar() {
@@ -29,7 +31,7 @@ export function NavBar() {
           >
             TP
           </span>
-          <span className="hidden sm:inline">Tejas Parjane</span>
+          <span className="hidden sm:inline">Tejas Parjane<span className="text-signal">.</span></span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">

@@ -19,9 +19,9 @@ describe('application routes', () => {
   it('renders the homepage', () => {
     renderAt('/')
     expect(
-      screen.getByRole('heading', { level: 1, name: /i build ai that works/i }),
+      screen.getByRole('heading', { level: 1, name: /intelligence is only useful/i }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /want to see how i think/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /built for a question/i })).toBeInTheDocument()
   })
 
   it('renders the projects index', () => {
@@ -29,7 +29,7 @@ describe('application routes', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
       /applied ai work, with evidence attached/i,
     )
-    expect(screen.getAllByRole('article')).toHaveLength(5)
+    expect(screen.getAllByRole('article')).toHaveLength(6)
   })
 
   it('supports a direct project URL and renders its case study', () => {
@@ -67,6 +67,11 @@ describe('application routes', () => {
       screen.getByRole('heading', { level: 1, name: /this page is not part of the system/i }),
     ).toBeInTheDocument()
   })
+
+  it('renders the contact route', () => {
+    renderAt('/contact/')
+    expect(screen.getByRole('heading', { level: 1, name: /let’s make the next decision/i })).toBeInTheDocument()
+  })
 })
 
 describe('primary navigation', () => {
@@ -79,7 +84,7 @@ describe('primary navigation', () => {
       </ThemeProvider>,
     )
 
-    for (const label of ['Work', 'AI Lab', 'About']) {
+    for (const label of ['Work', 'AI Lab', 'Experience', 'About', 'Contact']) {
       expect(screen.getAllByRole('link', { name: label }).length).toBeGreaterThan(0)
     }
 

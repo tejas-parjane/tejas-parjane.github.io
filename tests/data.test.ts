@@ -3,9 +3,9 @@ import { projects, statusLabels } from '@/data/projects'
 import { profile } from '@/data/profile'
 
 describe('project data integrity', () => {
-  it('contains the five projects with three recruiter-facing featured projects exactly once', () => {
-    expect(projects).toHaveLength(5)
-    expect(projects.filter((project) => project.featured)).toHaveLength(3)
+  it('contains the six projects with five recruiter-facing featured projects exactly once', () => {
+    expect(projects).toHaveLength(6)
+    expect(projects.filter((project) => project.featured)).toHaveLength(5)
     expect(new Set(projects.map((project) => project.slug)).size).toBe(projects.length)
     expect(new Set(projects.map((project) => project.name)).size).toBe(projects.length)
   })

@@ -5,6 +5,7 @@ import { AboutPage } from '@/pages/AboutPage'
 import { AgentAutopsyPage } from '@/pages/AgentAutopsyPage'
 import { BusinessDiagnosisPage } from '@/pages/BusinessDiagnosisPage'
 import { CognitiveOsPage } from '@/pages/CognitiveOsPage'
+import { ContactPage } from '@/pages/ContactPage'
 import { EngineeringPage } from '@/pages/EngineeringPage'
 import { ExperiencePage } from '@/pages/ExperiencePage'
 import { HomePage } from '@/pages/HomePage'
@@ -26,6 +27,7 @@ export function AppRoutes() {
       <Route path="/engineering" element={<EngineeringPage />} />
       <Route path="/experience" element={<ExperiencePage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )

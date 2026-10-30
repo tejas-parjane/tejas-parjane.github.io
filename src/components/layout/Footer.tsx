@@ -11,6 +11,7 @@ const footerLinks = [
   { label: 'Interactive AI Lab', to: '/cognitive-os/' },
   { label: 'Experience', to: '/experience/' },
   { label: 'About', to: '/about/' },
+  { label: 'Contact', to: '/contact/' },
 ]
 
 export function Footer() {

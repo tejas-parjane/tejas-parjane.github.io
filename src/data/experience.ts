@@ -16,8 +16,8 @@ export interface EducationItem {
 
 export const experience: ExperienceItem[] = [
   {
-    company: 'Building jaheeratech.com',
-    role: 'AI Engineer',
+    company: 'Savytics',
+    role: 'Freelance AI Engineer',
     period: 'Apr 2026 — Present',
     current: true,
     summary:
@@ -28,12 +28,12 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    company: 'TSL Consulting Pvt Ltd',
+    company: 'TSL Consulting Pvt. Ltd.',
     role: 'Data Analyst',
-    period: 'Jun 2023 — Apr 2026',
+    period: 'Jul 2023 — Mar 2026',
     current: false,
     summary:
-      'Analytics, business intelligence, and measurement across 20+ client accounts.',
+      'Analytics, business intelligence, and measurement across 20+ B2B technology client accounts.',
     highlights: [
       'Built and maintained dbt models on Snowflake to standardise KPI and metric definitions across client engagements.',
       'Designed Power BI dashboards integrating CRM, advertising, and sales data for conversion funnels, ROI, pipeline, and growth metrics.',
@@ -42,11 +42,11 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    company: 'Kanverse.ai',
-    role: 'Junior Data Analyst',
+    company: 'Jade Global',
+    role: 'Associate Analyst',
     period: 'May 2022 — Nov 2022',
     current: false,
-    summary: 'Data quality and analytical readiness for AI and NLP products.',
+    summary: 'Data quality and analytical readiness for machine-learning workflows.',
     highlights: [
       'Analysed large-scale datasets supporting AI and NLP products, ensuring data quality, consistency, and readiness for model development.',
       'Developed structured preprocessing and validation workflows that improved data-preparation efficiency by 50%.',
@@ -58,14 +58,14 @@ export const education: EducationItem[] = [
   {
     qualification: 'Master of Business Administration, Data Science',
     institution: 'Amity University (Online) · Noida',
-    period: 'Jan 2024 — May 2026',
-    detail: 'GPA 3.20 / 4.00',
+    period: 'Jan 2026 — Nov 2026',
+    detail: 'CGPA 7.88 / 10',
   },
   {
     qualification: 'Bachelor of Computer Applications',
-    institution: 'Bharati Vidyapeeth College of Engineering · Navi Mumbai',
-    period: 'Jul 2018 — Aug 2021',
-    detail: 'GPA 3.6 / 4.00',
+    institution: 'Bharati Vidyapeeth University',
+    period: '2018 — 2021',
+    detail: 'CGPA 8.03 / 10',
   },
 ]
 

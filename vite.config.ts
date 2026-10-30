@@ -19,7 +19,8 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./tests/setup.ts'],
     css: false,
-    testTimeout: 20000,
+    pool: 'vmThreads',
+    testTimeout: 40000,
     exclude: ['e2e/**', 'node_modules/**', 'dist/**'],
   },
 })

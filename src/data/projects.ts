@@ -106,6 +106,24 @@ export const projects: Project[] = [
       { kind: 'repository', label: 'Repository', href: 'https://github.com/tejas-parjane/forecasting-engine' },
       { kind: 'case-study', label: 'Case study', href: '/projects/forecasting-engine/' },
     ],
+    featured: true,
+  },
+  {
+    slug: 'customer-cohort-intelligence',
+    name: 'Customer Cohort Intelligence',
+    tagline: 'Cohort analysis and retention signals',
+    problem:
+      'Teams need to see how customer behaviour changes by acquisition cohort before deciding where retention work belongs.',
+    description:
+      'A customer cohort analysis project that structures retention and behavioural analysis into a decision-ready view. The public repository is the source of record for the current implementation.',
+    status: 'verified',
+    statusNote: 'Public repository linked below. Detailed case-study evidence is still being prepared.',
+    startupRelevance: 'Demonstrates cohort-based analysis as an input to retention and customer-value decisions.',
+    skills: ['Python', 'SQL', 'Cohort analysis', 'Data visualisation'],
+    links: [
+      { kind: 'repository', label: 'Repository', href: 'https://github.com/tejas-parjane/customer-cohort-intelligence' },
+      { kind: 'case-study', label: 'Case study', href: '/projects/customer-cohort-intelligence/' },
+    ],
     featured: false,
   },
   {

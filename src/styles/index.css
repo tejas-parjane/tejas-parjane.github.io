@@ -3,31 +3,33 @@
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 :root {
-  --canvas: #f7f5f0;
-  --surface: #ffffff;
-  --surface-2: #efede6;
-  --ink: #19231f;
-  --muted: #59665f;
-  --line: #deded5;
-  --line-strong: #c1c6bb;
-  --lime: #a7c7ae;
-  --lime-ink: #14231b;
-  --focus: #39734d;
+  --canvas: #f4efe6;
+  --surface: #fffdf8;
+  --surface-2: #e9e1d3;
+  --ink: #1e2722;
+  --muted: #5f655d;
+  --line: #d6cdbd;
+  --line-strong: #a99f8f;
+  --lime: #d8e15c;
+  --lime-ink: #1e2722;
+  --focus: #e14b2d;
+  --signal: #e14b2d;
 
   --shadow-card: 0 1px 2px rgba(23, 25, 28, 0.04), 0 8px 24px rgba(23, 25, 28, 0.04);
 }
 
 [data-theme='dark'] {
-  --canvas: #0b1020;
-  --surface: #111a2b;
-  --surface-2: #172338;
-  --ink: #eef3ff;
-  --muted: #a4b1c8;
-  --line: #26344c;
-  --line-strong: #3a4c68;
-  --lime: #80e0c1;
-  --lime-ink: #071a1a;
-  --focus: #9cf2d2;
+  --canvas: #18201d;
+  --surface: #222c27;
+  --surface-2: #303a33;
+  --ink: #f5efe4;
+  --muted: #c1b9aa;
+  --line: #485148;
+  --line-strong: #778074;
+  --lime: #d8e15c;
+  --lime-ink: #18201d;
+  --focus: #ff805e;
+  --signal: #ff805e;
 
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.28), 0 16px 40px rgba(0, 0, 0, 0.25);
 }
@@ -42,8 +44,10 @@
   --color-line-strong: var(--line-strong);
   --color-lime: var(--lime);
   --color-lime-ink: var(--lime-ink);
+  --color-signal: var(--signal);
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
   --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Code', 'JetBrains Mono', Consolas,
     'Liberation Mono', monospace;
 }
@@ -80,6 +84,10 @@
   p {
     text-wrap: pretty;
   }
+
+  a {
+    text-underline-offset: 0.18em;
+  }
 }
 
 @layer components {
@@ -87,12 +95,17 @@
     @apply font-mono text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted;
   }
 
+  .display-type {
+    font-family: var(--font-display);
+    font-variation-settings: 'SOFT' 50, 'WONK' 0, 'opsz' 72;
+  }
+
   .link-underline {
     @apply underline decoration-lime decoration-2 underline-offset-4 transition-colors hover:decoration-4;
   }
 
   .surface-card {
-    @apply rounded-2xl border border-line bg-surface;
+    @apply border border-line bg-surface;
   }
 }
 

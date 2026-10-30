@@ -12,6 +12,7 @@ const routes = [
   'projects/attention-os',
   'projects/forecasting-engine',
   'projects/agentci',
+  'projects/customer-cohort-intelligence',
   'cognitive-os',
   'cognitive-os/business-diagnosis',
   'cognitive-os/agent-autopsy',
@@ -19,6 +20,7 @@ const routes = [
   'engineering',
   'experience',
   'about',
+  'contact',
 ]
 
 for (const route of routes) {

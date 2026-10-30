@@ -8,11 +8,11 @@
         try {
           var key = 'tejas-theme'
           var saved = localStorage.getItem(key)
-          var theme = saved === 'light' || saved === 'dark' ? saved : 'dark'
+          var theme = saved === 'light' || saved === 'dark' ? saved : 'light'
           document.documentElement.dataset.theme = theme
           document.documentElement.style.colorScheme = theme
         } catch (error) {
-          document.documentElement.dataset.theme = 'dark'
+          document.documentElement.dataset.theme = 'light'
         }
       })()
     </script>
@@ -23,8 +23,8 @@
     />
     <meta name="author" content="Tejas Parjane" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#18201D" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href="https://tejas-parjane.github.io/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -46,7 +46,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,SOFT,WONK@9..144,0..100,0..1&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
